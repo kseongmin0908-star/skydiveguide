@@ -1,14 +1,1783 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyEntry — 스카이다이빙 & 윙슈트 입문 가이드</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-black: #080c14;
+    --sky-dark: #0d1520;
+    --sky-mid: #0f2238;
+    --sky-blue: #0a5fa0;
+    --sky-bright: #1a9fff;
+    --sky-cyan: #00d4ff;
+    --sky-white: #e8f4ff;
+    --accent-orange: #ff6b35;
+    --accent-yellow: #ffd700;
+    --text-muted: #6a8aaa;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(0,212,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--sky-black);
+    color: var(--sky-white);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--sky-cyan);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s;
+    mix-blend-mode: screen;
+  }
+  .cursor-trail {
+    position: fixed;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(0,212,255,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: left 0.15s ease, top 0.15s ease;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--sky-black); }
+  ::-webkit-scrollbar-thumb { background: var(--sky-blue); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(8,12,20,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--sky-cyan);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent-orange); }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--sky-cyan); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 60px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 30%, rgba(10,95,160,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(0,212,255,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, #080c14 0%, #0d1520 50%, #080c14 100%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridFloat 20s ease-in-out infinite;
+  }
+  @keyframes gridFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-altitude {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--sky-cyan);
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-title .line2 { color: var(--sky-cyan); display: block; }
+  .hero-title .line3 { color: var(--accent-orange); display: block; font-size: clamp(40px, 6vw, 80px); }
+  .hero-desc {
+    max-width: 520px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(232,244,255,0.7);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .btn-primary {
+    padding: 14px 36px;
+    background: var(--sky-cyan);
+    color: var(--sky-black);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--sky-white); transform: translateY(-2px); }
+  .btn-secondary {
+    padding: 14px 36px;
+    border: 1px solid rgba(0,212,255,0.4);
+    color: var(--sky-cyan);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { background: rgba(0,212,255,0.08); transform: translateY(-2px); }
+  .hero-stats {
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s forwards;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--sky-cyan);
+    line-height: 1;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+  .hero-scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s 1.3s forwards;
+    opacity: 0;
+  }
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sky-cyan));
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; position: relative; }
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--sky-cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-tag::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--sky-cyan);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .section-title em { color: var(--sky-cyan); font-style: normal; }
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+  }
+
+  /* KNOWLEDGE SECTION */
+  .knowledge-bg { background: var(--sky-dark); }
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .knowledge-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .knowledge-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sky-cyan), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .knowledge-card:hover { background: rgba(0,212,255,0.06); transform: translateY(-4px); }
+  .knowledge-card:hover::before { opacity: 1; }
+  .card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(0,212,255,0.1);
+    line-height: 1;
+    position: absolute;
+    top: 20px; right: 30px;
+  }
+  .card-icon {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: var(--sky-white);
+    margin-bottom: 12px;
+  }
+  .card-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(232,244,255,0.65);
+  }
+  .card-highlight {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 4px 12px;
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--sky-cyan);
+  }
+
+  /* LEARNING PATH */
+  .path-section { background: var(--sky-black); }
+  .path-timeline {
+    position: relative;
+    margin-top: 60px;
+  }
+  .path-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--sky-cyan), var(--sky-blue), transparent);
+  }
+  .path-item {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 48px;
+    padding-left: 100px;
+    position: relative;
+  }
+  .path-dot {
+    position: absolute;
+    left: 41px;
+    top: 20px;
+    width: 20px; height: 20px;
+    background: var(--sky-black);
+    border: 2px solid var(--sky-cyan);
+    border-radius: 50%;
+    z-index: 2;
+  }
+  .path-dot.active {
+    background: var(--sky-cyan);
+    box-shadow: 0 0 20px rgba(0,212,255,0.5);
+  }
+  .path-step {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--sky-cyan);
+    letter-spacing: 2px;
+    min-width: 120px;
+    padding-top: 22px;
+  }
+  .path-content {
+    flex: 1;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .path-content::after {
+    content: attr(data-phase);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    color: rgba(0,212,255,0.04);
+    position: absolute;
+    right: 20px; top: -10px;
+    line-height: 1;
+  }
+  .path-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .path-content p {
+    font-size: 14px;
+    color: rgba(232,244,255,0.65);
+    line-height: 1.8;
+  }
+  .path-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .tag {
+    padding: 3px 10px;
+    border: 1px solid rgba(255,107,53,0.4);
+    font-size: 11px;
+    color: var(--accent-orange);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+  }
+  .tag.blue { border-color: rgba(0,212,255,0.3); color: var(--sky-cyan); }
+  .tag.gold { border-color: rgba(255,215,0,0.3); color: var(--accent-yellow); }
+
+  /* COUNTRIES */
+  .countries-section { background: var(--sky-dark); }
+  .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .country-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 36px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .country-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-3px); }
+  .country-flag { font-size: 36px; margin-bottom: 16px; }
+  .country-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .country-sub { font-size: 13px; color: var(--sky-cyan); margin-bottom: 20px; font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+  .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .pros h4, .cons h4 {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'Space Mono', monospace;
+  }
+  .pros h4 { color: #4cff91; }
+  .cons h4 { color: #ff6b6b; }
+  .pros ul, .cons ul {
+    list-style: none;
+    font-size: 13px;
+    color: rgba(232,244,255,0.7);
+    line-height: 1.9;
+  }
+  .pros li::before { content: '+ '; color: #4cff91; font-weight: 700; }
+  .cons li::before { content: '− '; color: #ff6b6b; font-weight: 700; }
+  .country-cost {
+    position: absolute;
+    top: 24px; right: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--accent-yellow);
+    text-align: right;
+  }
+  .country-cost span { display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; color: var(--text-muted); font-weight: 300; }
+  .country-best {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 5px 14px;
+    background: rgba(255,215,0,0.08);
+    border: 1px solid rgba(255,215,0,0.25);
+    font-size: 12px;
+    color: var(--accent-yellow);
+  }
+
+  /* KOREA CARD SPECIAL */
+  .country-card.featured {
+    border-color: rgba(0,212,255,0.3);
+    background: rgba(0,212,255,0.04);
+  }
+  .country-card.featured::before {
+    content: 'LOCAL';
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--sky-cyan);
+    color: var(--sky-black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 3px 12px;
+  }
+
+  /* FITNESS */
+  .fitness-section { background: var(--sky-black); }
+  .fitness-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .fitness-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.4s;
+    position: relative;
+  }
+  .fitness-card:hover { border-color: var(--sky-cyan); background: rgba(0,212,255,0.05); }
+  .fitness-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .fitness-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: var(--sky-white);
+  }
+  .fitness-body {
+    font-size: 13px;
+    color: rgba(232,244,255,0.6);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .fitness-exercises {
+    border-top: 1px solid rgba(0,212,255,0.1);
+    padding-top: 16px;
+    font-size: 12px;
+    color: var(--sky-cyan);
+    font-family: 'Space Mono', monospace;
+    line-height: 1.9;
+  }
+  .bmi-info {
+    margin-top: 48px;
+    padding: 32px;
+    background: rgba(255,107,53,0.06);
+    border: 1px solid rgba(255,107,53,0.2);
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  }
+  .bmi-info-icon { font-size: 48px; }
+  .bmi-info-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--accent-orange);
+    margin-bottom: 8px;
+  }
+  .bmi-info-text p { font-size: 14px; color: rgba(232,244,255,0.65); line-height: 1.8; }
+
+  /* WINGSUIT */
+  .wingsuit-section {
+    background: linear-gradient(180deg, var(--sky-dark) 0%, rgba(10,95,160,0.15) 50%, var(--sky-dark) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .wingsuit-section::before {
+    content: 'WINGSUIT';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    color: rgba(0,212,255,0.03);
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: -5px;
+    pointer-events: none;
+  }
+  .wingsuit-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 60px;
+  }
+  .wingsuit-info h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--accent-orange);
+    margin-bottom: 20px;
+  }
+  .wingsuit-info p {
+    font-size: 14px;
+    color: rgba(232,244,255,0.7);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+  .wingsuit-requirements {
+    margin-top: 32px;
+  }
+  .req-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .req-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--sky-cyan);
+    min-width: 40px;
+    line-height: 1;
+  }
+  .req-text h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .req-text p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .wingsuit-types { }
+  .wtype-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 28px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+  }
+  .wtype-card:hover { border-color: rgba(0,212,255,0.4); }
+  .wtype-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .wtype-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .wtype-level {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border: 1px solid;
+  }
+  .level-beginner { color: #4cff91; border-color: rgba(76,255,145,0.3); }
+  .level-intermediate { color: var(--accent-yellow); border-color: rgba(255,215,0,0.3); }
+  .level-advanced { color: var(--accent-orange); border-color: rgba(255,107,53,0.3); }
+  .wtype-body { font-size: 13px; color: rgba(232,244,255,0.65); line-height: 1.8; }
+
+  /* FAQ */
+  .faq-section { background: var(--sky-black); }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .faq-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 32px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .faq-item:hover { background: rgba(0,212,255,0.05); }
+  .faq-q {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    color: var(--sky-white);
+  }
+  .faq-q::after {
+    content: '+';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--sky-cyan);
+    min-width: 20px;
+    text-align: right;
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 13px;
+    color: rgba(232,244,255,0.65);
+    line-height: 1.9;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  /* EQUIPMENT */
+  .equipment-section { background: var(--sky-dark); }
+  .equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .equipment-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .equipment-card:hover { background: rgba(0,212,255,0.06); }
+  .equipment-card.essential { border-color: rgba(255,107,53,0.3); }
+  .equipment-badge {
+    position: absolute;
+    top: 0; right: 0;
+    padding: 4px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .badge-essential { background: rgba(255,107,53,0.2); color: var(--accent-orange); }
+  .badge-recommended { background: rgba(0,212,255,0.1); color: var(--sky-cyan); }
+  .equip-icon { font-size: 36px; margin-bottom: 20px; }
+  .equip-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .equip-kr { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+  .equip-body { font-size: 13px; color: rgba(232,244,255,0.65); line-height: 1.8; }
+  .equip-price {
+    margin-top: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-yellow);
+  }
+
+  /* SAFETY */
+  .safety-section { background: var(--sky-black); }
+  .safety-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .safety-card {
+    background: linear-gradient(135deg, rgba(255,107,53,0.06) 0%, var(--glass) 100%);
+    border: 1px solid rgba(255,107,53,0.2);
+    padding: 32px;
+  }
+  .safety-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .safety-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: var(--accent-orange);
+    margin-bottom: 12px;
+  }
+  .safety-body { font-size: 14px; color: rgba(232,244,255,0.65); line-height: 1.9; }
+  .safety-body ul { padding-left: 16px; }
+  .safety-body li { margin-bottom: 6px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--sky-dark);
+    border-top: 1px solid var(--glass-border);
+    padding: 60px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 4px;
+    color: var(--sky-cyan);
+    margin-bottom: 16px;
+  }
+  .footer-logo span { color: var(--accent-orange); }
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--sky-cyan); }
+  .footer-disclaimer {
+    font-size: 12px;
+    color: rgba(106,138,170,0.5);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 0 60px;
+  }
+
+  /* MOBILE NAV TOGGLE */
+  .nav-toggle { display: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 20px 30px; }
+    nav .nav-links { display: none; }
+    .nav-toggle { display: block; color: var(--sky-cyan); font-size: 20px; background: none; border: none; cursor: pointer; }
+    section { padding: 70px 30px; }
+    .hero { padding: 0 30px; }
+    .hero-stats { right: 30px; gap: 24px; }
+    .knowledge-grid { grid-template-columns: 1fr 1fr; }
+    .countries-grid { grid-template-columns: 1fr; }
+    .fitness-grid { grid-template-columns: 1fr 1fr; }
+    .wingsuit-layout { grid-template-columns: 1fr; gap: 40px; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .equipment-grid { grid-template-columns: 1fr 1fr; }
+    .safety-grid { grid-template-columns: 1fr; }
+    footer { padding: 40px 30px; }
+    .divider { margin: 0 30px; }
+  }
+  @media (max-width: 640px) {
+    .hero-stats { display: none; }
+    .knowledge-grid { grid-template-columns: 1fr; }
+    .fitness-grid { grid-template-columns: 1fr; }
+    .pros-cons { grid-template-columns: 1fr; }
+    .equipment-grid { grid-template-columns: 1fr; }
+    .path-item { padding-left: 60px; }
+    .path-step { display: none; }
+    .hero-title { font-size: 56px; }
+  }
+
+  /* ENTRANCE ANIMATIONS */
+  .animate-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .animate-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">SKY<span>ENTRY</span></a>
+  <ul class="nav-links">
+    <li><a href="#basics">기초지식</a></li>
+    <li><a href="#learning">교육과정</a></li>
+    <li><a href="#countries">국가별비교</a></li>
+    <li><a href="#fitness">체력준비</a></li>
+    <li><a href="#wingsuit">윙슈트</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#equipment">장비</a></li>
+    <li><a href="#safety">안전</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-altitude">// ALT: 4,000M ↑ — FREE FALL VELOCITY: 200KM/H</div>
+  <h1 class="hero-title">
+    하늘로의<br>
+    <span class="line2">첫 번째</span>
+    <span class="line3">도약</span>
+  </h1>
+  <p class="hero-desc">
+    스카이다이빙과 윙슈트 입문을 위한 완전한 가이드.<br>
+    AFF 교육과정부터 국가별 훈련 옵션, 필수 체력 준비까지 —<br>
+    당신의 첫 점프를 위한 모든 것이 여기 있습니다.
+  </p>
+  <div class="hero-cta">
+    <a href="#basics" class="btn-primary">입문 시작하기</a>
+    <a href="#faq" class="btn-secondary">자주 묻는 질문</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">200+</div>
+      <div class="stat-label">자유낙하 속도 km/h</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">60s</div>
+      <div class="stat-label">평균 자유낙하 시간</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4,000m</div>
+      <div class="stat-label">표준 점프 고도</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    스크롤하여 탐색
+  </div>
+</section>
+
+<!-- BASICS -->
+<section class="knowledge-bg" id="basics">
+  <div class="section-tag">기초 지식</div>
+  <h2 class="section-title">스카이다이빙을<br><em>이해하다</em></h2>
+  <p class="section-subtitle">점프 전에 반드시 알아야 할 핵심 개념들. 스카이다이빙은 단순한 낙하가 아닌 정교한 기술과 지식의 집약체입니다.</p>
+
+  <div class="knowledge-grid">
+    <div class="knowledge-card animate-in">
+      <div class="card-num">01</div>
+      <div class="card-icon">🪂</div>
+      <div class="card-title">자유낙하 (Free Fall)</div>
+      <div class="card-body">
+        항공기에서 탈출 후 낙하산을 펴기 전까지의 구간입니다. 고도 4,000m 기준 약 50~60초 동안 200km/h 이상의 속도로 하강합니다. 이 구간에서 몸의 자세와 움직임을 제어하는 것이 핵심 기술입니다.
+      </div>
+      <span class="card-highlight">4,000m → 800m 구간</span>
+    </div>
+    <div class="knowledge-card animate-in">
+      <div class="card-num">02</div>
+      <div class="card-icon">📐</div>
+      <div class="card-title">아치 자세 (Arch)</div>
+      <div class="card-body">
+        자유낙하 중 가장 기본이 되는 안정 자세. 배를 아래로, 등을 위로 향한 상태에서 팔다리를 펼쳐 균형을 잡습니다. 처음에는 지상 훈련을 통해 근육 기억으로 익혀야 합니다.
+      </div>
+      <span class="card-highlight">안정적 낙하의 핵심</span>
+    </div>
+    <div class="knowledge-card animate-in">
+      <div class="card-num">03</div>
+      <div class="card-icon">⏱️</div>
+      <div class="card-title">개폐 고도 (Opening Altitude)</div>
+      <div class="card-body">
+        낙하산을 개방해야 하는 최소 안전 고도. 일반적으로 800~1,000m(2,500~3,000ft)가 기준입니다. AFF 훈련생은 1,500m에서 개방합니다. 이를 무시하는 것은 치명적입니다.
+      </div>
+      <span class="card-highlight">최소 800m 이상에서 개방</span>
+    </div>
+    <div class="knowledge-card animate-in">
+      <div class="card-num">04</div>
+      <div class="card-icon">🎯</div>
+      <div class="card-title">캐노피 조종</div>
+      <div class="card-body">
+        낙하산이 펼쳐진 후의 비행 단계. 두 개의 토글(조종 핸들)을 사용해 방향과 속도를 조절합니다. 착륙 지점을 향해 정확히 접근하는 패턴 비행 기술이 요구됩니다.
+      </div>
+      <span class="card-highlight">토글 조작 + 패턴 비행</span>
+    </div>
+    <div class="knowledge-card animate-in">
+      <div class="card-num">05</div>
+      <div class="card-icon">🔴</div>
+      <div class="card-title">비상 절차 (Emergency)</div>
+      <div class="card-body">
+        주 낙하산 오작동 시 예비 낙하산을 개방하는 절차. 절단 핸들(Cut-away)로 주 낙하산을 분리한 후 예비 핸들을 당깁니다. 근육 기억이 될 때까지 반복 훈련이 필수입니다.
+      </div>
+      <span class="card-highlight">절단 핸들 → 예비 개방</span>
+    </div>
+    <div class="knowledge-card animate-in">
+      <div class="card-num">06</div>
+      <div class="card-icon">🏟️</div>
+      <div class="card-title">착륙 패턴</div>
+      <div class="card-body">
+        항공기의 착륙 접근과 유사하게 정해진 패턴으로 착지 지점에 접근합니다. 다운윈드→베이스→파이널 레그 순서로 진입하며, 착지 직전 PLF(낙하 착지법) 자세를 취합니다.
+      </div>
+      <span class="card-highlight">PLF 착지 기술</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LEARNING PATH -->
+<section class="path-section" id="learning">
+  <div class="section-tag">교육 과정</div>
+  <h2 class="section-title">입문부터<br><em>자격증까지</em></h2>
+  <p class="section-subtitle">스카이다이버가 되는 길은 체계적입니다. AFF(Accelerated Freefall) 과정을 통해 단계적으로 능력을 키워나갑니다.</p>
+
+  <div class="path-timeline">
+    <div class="path-item animate-in">
+      <div class="path-dot active"></div>
+      <div class="path-step">PHASE 01</div>
+      <div class="path-content" data-phase="1">
+        <h3>탠덤 점프 (Tandem Skydive)</h3>
+        <p>공식 교육 전 선택사항. 전문 탠덤 강사와 하네스로 연결되어 함께 점프합니다. 스카이다이빙의 감각을 미리 체험하고 이 스포츠가 자신에게 맞는지 확인하는 단계. 약 1~2시간의 간단한 브리핑 후 진행됩니다.</p>
+        <div class="path-tags">
+          <span class="tag blue">예비 체험</span>
+          <span class="tag">약 20~40만원</span>
+          <span class="tag blue">1일</span>
+        </div>
+      </div>
+    </div>
+    <div class="path-item animate-in">
+      <div class="path-dot"></div>
+      <div class="path-step">PHASE 02</div>
+      <div class="path-content" data-phase="2">
+        <h3>AFF 지상 교육 (Ground School)</h3>
+        <p>6~8시간의 집중 지상 교육. 장비 구조와 사용법, 비상 절차, 자유낙하 자세, 캐노피 조종, 착륙 패턴을 이론과 실습으로 배웁니다. 이 단계를 탄탄히 해야 이후 단계가 수월합니다.</p>
+        <div class="path-tags">
+          <span class="tag">이론 + 실습</span>
+          <span class="tag blue">6~8시간</span>
+          <span class="tag">필수 선행 과정</span>
+        </div>
+      </div>
+    </div>
+    <div class="path-item animate-in">
+      <div class="path-dot"></div>
+      <div class="path-step">PHASE 03</div>
+      <div class="path-content" data-phase="3">
+        <h3>AFF 레벨 1~3 (유도 낙하산 단계)</h3>
+        <p>두 명의 강사가 양옆에서 잡아주는 상태로 진행됩니다. 레벨 1에서는 기본 자세와 고도 인식, 개폐 절차를 익힙니다. 레벨 2~3은 전후 움직임과 회전, 안정된 자세 복구를 연습합니다. 각 레벨은 브리핑 → 점프 → 디브리핑으로 구성됩니다.</p>
+        <div class="path-tags">
+          <span class="tag">강사 2인 보조</span>
+          <span class="tag blue">레벨당 1점프</span>
+          <span class="tag gold">4,000m 고도</span>
+        </div>
+      </div>
+    </div>
+    <div class="path-item animate-in">
+      <div class="path-dot"></div>
+      <div class="path-step">PHASE 04</div>
+      <div class="path-content" data-phase="4">
+        <h3>AFF 레벨 4~8 (독립 자유낙하 단계)</h3>
+        <p>레벨 4부터 강사 1인 보조로 줄어들고, 레벨 7~8은 완전 단독 점프를 수행합니다. 전방/후방 루프, 수평 이동, 정밀 도킹, 추적 비행 등을 배웁니다. 이 과정이 가장 도전적이며 성장이 빠릅니다.</p>
+        <div class="path-tags">
+          <span class="tag">강사 1인 → 단독</span>
+          <span class="tag blue">5점프</span>
+          <span class="tag gold">핵심 기술 습득</span>
+        </div>
+      </div>
+    </div>
+    <div class="path-item animate-in">
+      <div class="path-dot"></div>
+      <div class="path-step">PHASE 05</div>
+      <div class="path-content" data-phase="5">
+        <h3>졸업 점프 & A 라이선스 취득</h3>
+        <p>AFF 과정 이수 후 추가 25점프를 완료하면 USPA A 라이선스(총 25점프) 또는 각국 항공스포츠 협회의 자격증을 취득할 수 있습니다. 이후 혼자 점프가 가능하고, 타 drop zone에서도 점프할 수 있습니다.</p>
+        <div class="path-tags">
+          <span class="tag gold">A 라이선스</span>
+          <span class="tag blue">총 25점프 이상</span>
+          <span class="tag">국제 호환</span>
+        </div>
+      </div>
+    </div>
+    <div class="path-item animate-in">
+      <div class="path-dot"></div>
+      <div class="path-step">PHASE 06</div>
+      <div class="path-content" data-phase="6">
+        <h3>B→C→D 라이선스 & 윙슈트 입문</h3>
+        <p>B 라이선스(50점프), C 라이선스(200점프)로 발전하면서 팀 점프, 캐노피 필로팅, 프리플라이 등 전문 기술을 익힙니다. 윙슈트는 최소 200점프 이후 전문 윙슈트 FFC(First Flight Course) 이수가 필요합니다.</p>
+        <div class="path-tags">
+          <span class="tag gold">윙슈트 입문 조건</span>
+          <span class="tag">200점프+</span>
+          <span class="tag blue">FFC 과정 필수</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COUNTRIES -->
+<section class="countries-section" id="countries">
+  <div class="section-tag">국가별 비교</div>
+  <h2 class="section-title">어디서<br><em>배울까?</em></h2>
+  <p class="section-subtitle">각 국가는 고도, 날씨, 비용, 시스템이 다릅니다. 자신의 상황에 맞는 최적의 훈련 장소를 선택하세요.</p>
+
+  <div class="countries-grid">
+
+    <div class="country-card featured animate-in">
+      <div class="country-flag">🇰🇷</div>
+      <div class="country-name">대한민국</div>
+      <div class="country-sub">KOREA — 국내 훈련</div>
+      <div class="country-cost">70~120만원 <span>AFF 전 과정</span></div>
+      <p style="font-size:13px; color:rgba(232,244,255,0.65); line-height:1.8;">
+        경기도 연천, 충남 논산 등 주요 drop zone 보유. 소규모 클럽 중심 운영으로 강사와 밀착 훈련이 가능합니다.
+      </p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>장점</h4>
+          <ul>
+            <li>한국어 교육 가능</li>
+            <li>이동 비용 없음</li>
+            <li>친밀한 커뮤니티</li>
+            <li>사후 멘토링 용이</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>단점</h4>
+          <ul>
+            <li>드롭존 수 적음</li>
+            <li>날씨 변수 큼</li>
+            <li>최대 고도 제한적</li>
+            <li>장비 선택폭 좁음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="country-best">입문 / 커뮤니티 중심에 최적</div>
+    </div>
+
+    <div class="country-card animate-in">
+      <div class="country-flag">🇺🇸</div>
+      <div class="country-name">미국 (USA)</div>
+      <div class="country-sub">USA — 글로벌 스탠다드</div>
+      <div class="country-cost">$1,500~2,500 <span>AFF 전 과정</span></div>
+      <p style="font-size:13px; color:rgba(232,244,255,0.65); line-height:1.8;">
+        플로리다, 캘리포니아, 텍사스 등 연중 운영 가능한 대형 DZ 다수. USPA 체계로 전 세계에서 호환되는 라이선스를 취득합니다.
+      </p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>장점</h4>
+          <ul>
+            <li>최대 고도 5,500m+</li>
+            <li>연중 훈련 가능</li>
+            <li>USPA 국제 라이선스</li>
+            <li>다양한 전문 교관</li>
+            <li>첨단 장비 경험</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>단점</h4>
+          <ul>
+            <li>항공편 + 체류 비용</li>
+            <li>영어 필수</li>
+            <li>비자 준비 필요</li>
+          </ul>
+        </div>
+      </div>
+      <div class="country-best">경력 개발 / 고급 기술 습득에 최적</div>
+    </div>
+
+    <div class="country-card animate-in">
+      <div class="country-flag">🇦🇺</div>
+      <div class="country-name">호주 (Australia)</div>
+      <div class="country-sub">AUSTRALIA — 워킹홀리데이 선호지</div>
+      <div class="country-cost">AUD 1,800~3,000 <span>AFF 전 과정</span></div>
+      <p style="font-size:13px; color:rgba(232,244,255,0.65); line-height:1.8;">
+        퀸즐랜드 미션비치, 뉴사우스웨일즈 주 등 경관이 뛰어난 DZ 다수. 워킹홀리데이 비자와 함께 훈련 받는 한국인이 많습니다.
+      </p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>장점</h4>
+          <ul>
+            <li>아름다운 경관</li>
+            <li>워홀과 병행 가능</li>
+            <li>영어 + 실력 동시 향상</li>
+            <li>한인 커뮤니티 존재</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>단점</h4>
+          <ul>
+            <li>장거리 여행 비용</li>
+            <li>계절별 날씨 편차</li>
+            <li>AUD 환율 부담</li>
+          </ul>
+        </div>
+      </div>
+      <div class="country-best">워홀/여행과 결합 시 최적</div>
+    </div>
+
+    <div class="country-card animate-in">
+      <div class="country-flag">🇳🇿</div>
+      <div class="country-name">뉴질랜드</div>
+      <div class="country-sub">NEW ZEALAND — 경관 최상</div>
+      <div class="country-cost">NZD 1,600~2,800 <span>AFF 전 과정</span></div>
+      <p style="font-size:13px; color:rgba(232,244,255,0.65); line-height:1.8;">
+        퀸스타운, 아벨태즈먼 등 세계 최고의 경관을 배경으로 점프 가능. 비교적 작은 DZ이지만 교관의 전문성이 높습니다.
+      </p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>장점</h4>
+          <ul>
+            <li>세계 최고 경관</li>
+            <li>전문 교관진</li>
+            <li>안전 기준 높음</li>
+            <li>체계적 교육</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>단점</h4>
+          <ul>
+            <li>높은 물가/비용</li>
+            <li>DZ 위치 분산</li>
+            <li>날씨 변동 많음</li>
+          </ul>
+        </div>
+      </div>
+      <div class="country-best">특별한 경험 + 품질 중시 시 최적</div>
+    </div>
+
+    <div class="country-card animate-in">
+      <div class="country-flag">🇨🇿</div>
+      <div class="country-name">체코 / 유럽</div>
+      <div class="country-sub">CZECH REPUBLIC — 유럽 허브</div>
+      <div class="country-cost">EUR 1,200~2,000 <span>AFF 전 과정</span></div>
+      <p style="font-size:13px; color:rgba(232,244,255,0.65); line-height:1.8;">
+        프라하 인근 Prostějov, Lostice DZ 등 유럽 중심부에서 훈련 가능. 유럽 여행과 병행하기 최적의 위치이며 비용이 미국 대비 저렴합니다.
+      </p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>장점</h4>
+          <ul>
+            <li>미국 대비 저렴</li>
+            <li>유럽 여행 병행</li>
+            <li>다양한 국적 스카이다이버</li>
+            <li>쉔겐 지역 접근성</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>단점</h4>
+          <ul>
+            <li>여름 한정 운영</li>
+            <li>영어 소통 제한</li>
+            <li>라이선스 국가별 상이</li>
+          </ul>
+        </div>
+      </div>
+      <div class="country-best">유럽 배낭여행과 결합 시 최적</div>
+    </div>
+
+    <div class="country-card animate-in">
+      <div class="country-flag">🇹🇭</div>
+      <div class="country-name">태국</div>
+      <div class="country-sub">THAILAND — 가성비 + 날씨</div>
+      <div class="country-cost">THB 35,000~60,000 <span>AFF 전 과정</span></div>
+      <p style="font-size:13px; color:rgba(232,244,255,0.65); line-height:1.8;">
+        파타야 Thai Sky Adventures, 치앙마이 DZ 등 연중 따뜻한 날씨. 한국에서 3~4시간 비행으로 접근 가능하고 물가도 합리적입니다.
+      </p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>장점</h4>
+          <ul>
+            <li>가까운 비행거리</li>
+            <li>연중 온화한 날씨</li>
+            <li>저렴한 물가</li>
+            <li>한국인 교관 있음</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>단점</h4>
+          <ul>
+            <li>DZ 규모 소형</li>
+            <li>우기 영향 있음</li>
+            <li>고도 제한</li>
+          </ul>
+        </div>
+      </div>
+      <div class="country-best">단기간 / 예산 절약에 최적</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FITNESS -->
+<section class="fitness-section" id="fitness">
+  <div class="section-tag">체력 준비</div>
+  <h2 class="section-title">몸을<br><em>만들어라</em></h2>
+  <p class="section-subtitle">스카이다이빙에 특별한 운동선수급 체력이 필요한 것은 아닙니다. 하지만 특정 근력과 유연성은 안전하고 즐거운 점프를 위해 매우 중요합니다.</p>
+
+  <div class="fitness-grid">
+    <div class="fitness-card animate-in">
+      <span class="fitness-icon">🏋️</span>
+      <div class="fitness-title">코어 근력</div>
+      <div class="fitness-body">자유낙하 중 자세 안정의 핵심. 복근, 허리, 골반을 연결하는 심부 근육이 강해야 자세 제어가 쉽습니다.</div>
+      <div class="fitness-exercises">
+        플랭크 3×60초<br>
+        데드버그 3×12회<br>
+        버드독 3×12회<br>
+        사이드 플랭크 3×45초
+      </div>
+    </div>
+    <div class="fitness-card animate-in">
+      <span class="fitness-icon">🦵</span>
+      <div class="fitness-title">하체 근력</div>
+      <div class="fitness-body">착륙 시 충격 흡수와 PLF(낙하착지법) 실행에 필요. 무릎 부상 예방을 위해 중요합니다.</div>
+      <div class="fitness-exercises">
+        스쿼트 3×15회<br>
+        런지 3×12회<br>
+        박스 점프 3×10회<br>
+        카프레이즈 3×20회
+      </div>
+    </div>
+    <div class="fitness-card animate-in">
+      <span class="fitness-icon">💪</span>
+      <div class="fitness-title">상체 & 등 근력</div>
+      <div class="fitness-body">낙하산 조종 토글 조작과 하네스 착용 시 자세 유지. 특히 어깨와 등 상부 근육이 중요합니다.</div>
+      <div class="fitness-exercises">
+        풀업 또는 밴드 풀다운<br>
+        로우 3×12회<br>
+        숄더 프레스 3×12회<br>
+        페이스풀 3×15회
+      </div>
+    </div>
+    <div class="fitness-card animate-in">
+      <span class="fitness-icon">🤸</span>
+      <div class="fitness-title">유연성</div>
+      <div class="fitness-body">아치 자세와 각종 공중 움직임을 위해 엉덩이굴근, 흉추, 어깨 유연성이 필요합니다.</div>
+      <div class="fitness-exercises">
+        고양이-소 스트레칭<br>
+        힙플렉서 스트레칭<br>
+        흉추 회전 운동<br>
+        숄더 오픈 스트레칭
+      </div>
+    </div>
+    <div class="fitness-card animate-in">
+      <span class="fitness-icon">🫁</span>
+      <div class="fitness-title">심폐 지구력</div>
+      <div class="fitness-body">고고도에서 산소 감소에 적응. 반복 점프와 기어 착용 후 움직임에도 지치지 않으려면 기본 유산소 체력이 필요합니다.</div>
+      <div class="fitness-exercises">
+        조깅 30분 주 3회<br>
+        수영 또는 사이클링<br>
+        인터벌 훈련<br>
+        HIIT 20~30분
+      </div>
+    </div>
+    <div class="fitness-card animate-in">
+      <span class="fitness-icon">🧘</span>
+      <div class="fitness-title">정신적 준비</div>
+      <div class="fitness-body">첫 점프의 공포를 관리하는 능력. 브리핑 내용을 기억하고 실행하려면 극도의 긴장 상태에서도 집중력을 유지해야 합니다.</div>
+      <div class="fitness-exercises">
+        박스 호흡 연습<br>
+        명상 & 시각화<br>
+        점진적 노출 훈련<br>
+        체크리스트 숙달
+      </div>
+    </div>
+  </div>
+
+  <div class="bmi-info animate-in">
+    <div class="bmi-info-icon">⚖️</div>
+    <div class="bmi-info-text">
+      <h3>체중 및 신체 조건 제한</h3>
+      <p>
+        대부분의 DZ에서 최대 체중 제한은 <strong>100~110kg</strong>입니다(일부 장비/강사에 따라 다름). 탠덤의 경우 더 엄격해 보통 <strong>90~100kg</strong>이 기준. 최소 연령은 국가마다 다르지만 보통 <strong>만 16~18세</strong> 이상이며, 임산부와 특정 심장 질환자는 점프가 금지됩니다. 사전에 반드시 의사와 상담하세요.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WINGSUIT -->
+<section class="wingsuit-section" id="wingsuit">
+  <div class="section-tag">윙슈트</div>
+  <h2 class="section-title">날개를<br><em>달다</em></h2>
+
+  <div class="wingsuit-layout">
+    <div class="wingsuit-info">
+      <h2>윙슈트란?</h2>
+      <p>
+        팔과 다리 사이에 특수 천을 부착해 인체가 날개가 되는 특수 점프 장비입니다. 자유낙하 속도를 줄이고 수평 이동을 극대화하여 새처럼 비행하는 경험을 제공합니다.
+      </p>
+      <p>
+        윙슈트 파일럿은 수평 이동 대 하강 비율인 글라이드 레이시오 2:1 ~ 3:1을 달성하며, 숙련자는 5:1 이상도 가능합니다. 상승기류를 이용한 서핑 비행, 산악 지형 따라 비행하는 프록시마이티 플라잉까지 발전할 수 있습니다.
+      </p>
+      <p>
+        그러나 윙슈트는 스카이다이빙 중 가장 높은 위험도를 가진 분야입니다. 충분한 경험 없이 시작하는 것은 절대 금물입니다.
+      </p>
+
+      <div class="wingsuit-requirements">
+        <div class="req-item animate-in">
+          <div class="req-num">200</div>
+          <div class="req-text">
+            <h4>최소 점프 횟수</h4>
+            <p>윙슈트 FFC(첫 비행 과정) 참여를 위한 최소 조건. 대부분의 강사는 300점프 이상을 권장합니다.</p>
+          </div>
+        </div>
+        <div class="req-item animate-in">
+          <div class="req-num">18m</div>
+          <div class="req-text">
+            <h4>개폐 고도 인식</h4>
+            <p>윙슈트 착용 시 개폐 절차가 복잡해집니다. 정확한 고도 인식과 개폐 기술이 완벽해야 합니다.</p>
+          </div>
+        </div>
+        <div class="req-item animate-in">
+          <div class="req-num">FFC</div>
+          <div class="req-text">
+            <h4>First Flight Course 의무 이수</h4>
+            <p>인증된 윙슈트 강사에게 지상 교육과 첫 비행을 반드시 지도받아야 합니다. 독학 절대 금지.</p>
+          </div>
+        </div>
+        <div class="req-item animate-in">
+          <div class="req-num">B+</div>
+          <div class="req-text">
+            <h4>B 라이선스 이상</h4>
+            <p>안정적인 자세 제어, 비상 절차 숙달, 캐노피 정밀 조종 능력이 완전히 갖춰져 있어야 합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wingsuit-types">
+      <div class="wtype-card animate-in">
+        <div class="wtype-header">
+          <div class="wtype-name">초급 윙슈트 (Swift / Intro)</div>
+          <div class="wtype-level level-beginner">BEGINNER</div>
+        </div>
+        <div class="wtype-body">
+          작은 표면적으로 안정성이 높습니다. Tony Suits ATC, Phoenix Fly Intro 계열. FFC 과정에서 주로 사용하며, 비행 감각을 익히는 단계. 글라이드 레이시오 1.5~2:1. 가격 $700~1,200.
+        </div>
+      </div>
+      <div class="wtype-card animate-in">
+        <div class="wtype-header">
+          <div class="wtype-name">중급 윙슈트 (Sport)</div>
+          <div class="wtype-level level-intermediate">INTERMEDIATE</div>
+        </div>
+        <div class="wtype-body">
+          더 넓은 날개로 향상된 비행 거리와 공중 기동이 가능합니다. Squirrel Aura, Phoenix Fly Phantom 계열. 팀 비행과 공중 기동 연습에 적합. 글라이드 레이시오 2~3:1. 가격 $1,200~1,800.
+        </div>
+      </div>
+      <div class="wtype-card animate-in">
+        <div class="wtype-header">
+          <div class="wtype-name">고급 퍼포먼스 수트</div>
+          <div class="wtype-level level-advanced">ADVANCED</div>
+        </div>
+        <div class="wtype-body">
+          최대 날개 면적으로 최고 성능의 글라이드. Squirrel Aura X, Tonfly Virus 계열. 프록시마이티 플라잉과 경쟁적 비행에 사용. 극도의 통제 기술 필요. 가격 $2,000~3,500+.
+        </div>
+      </div>
+      <div class="wtype-card animate-in">
+        <div class="wtype-header">
+          <div class="wtype-name">BASE 윙슈트</div>
+          <div class="wtype-level level-advanced">EXTREME</div>
+        </div>
+        <div class="wtype-body">
+          낮은 고도의 BASE 점프와 결합. 프록시마이티 플라잉의 정점. 1,000점프 이상, 다년간의 윙슈트 경험 필수. 사망률이 높아 극도의 신중함이 요구됩니다. 일반 입문자에게는 먼 미래의 목표입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-tag">자주 묻는 질문</div>
+  <h2 class="section-title">궁금한 것들<br><em>해결하기</em></h2>
+  <p class="section-subtitle">처음 스카이다이빙을 접하는 분들이 가장 많이 묻는 질문들을 모았습니다.</p>
+
+  <div class="faq-grid">
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">안전 / 공포</div>
+      <div class="faq-q">스카이다이빙은 얼마나 위험한가요?</div>
+      <div class="faq-a">
+        미국 USPA 통계 기준 라이선스 소지 스카이다이버의 사망률은 약 10만 점프당 0.4명 수준으로, 자동차 운전보다 낮다는 연구도 있습니다. AFF 교육생은 강사가 동행하므로 더욱 안전합니다. 위험은 존재하지만 체계적인 훈련과 절차 준수로 극소화할 수 있습니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">조건</div>
+      <div class="faq-q">수영을 못 해도 할 수 있나요?</div>
+      <div class="faq-a">
+        일반적으로 수영 능력은 스카이다이빙 조건이 아닙니다. 착수 가능성이 있는 연안 DZ에서는 수영 능력을 확인하는 경우도 있지만, 대부분의 내륙 DZ에서는 관계없습니다. 체중, 나이(만 18세 이상), 건강 상태가 더 중요한 요소입니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">비용</div>
+      <div class="faq-q">라이선스 취득까지 총 비용은?</div>
+      <div class="faq-a">
+        국내 기준 AFF 코스 70~120만원 + 졸업 후 추가 점프 비용이 필요합니다. 해외(미국/호주) 기준 왕복 항공권 포함 시 총 400~600만원 예상. 라이선스 취득 후에도 점프당 2~4만원(고도, DZ에 따라 다름)의 비용이 지속 발생합니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">준비</div>
+      <div class="faq-q">고소공포증이 있는데 할 수 있을까요?</div>
+      <div class="faq-a">
+        놀랍게도 고소공포증이 있는 사람들도 많이 성공합니다. 고소공포증은 주로 시각적 기준점(계단, 낭떠러지 등)에서 발생하는데, 스카이다이빙의 고도에서는 지면이 너무 멀어 오히려 그 반응이 감소하는 경우가 많습니다. 탠덤 점프로 먼저 체험해 보는 것을 권장합니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">신체</div>
+      <div class="faq-q">안경 착용자는 점프가 가능한가요?</div>
+      <div class="faq-a">
+        가능합니다. 고글을 안경 위에 착용할 수 있으며, 탠덤이나 AFF 교관이 적합한 고글을 제공합니다. 렌즈를 착용한다면 일반 스카이다이빙 고글 사용이 더 편리합니다. 고글이 잘 맞는지 지상에서 미리 확인하세요.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">경험</div>
+      <div class="faq-q">첫 점프 시 어떤 느낌인가요?</div>
+      <div class="faq-a">
+        개인차가 크지만 대부분 항공기 문이 열릴 때 강렬한 긴장감, 탈출 순간 0.5~1초의 혼란, 이후 극도의 자유감과 아드레날린을 경험합니다. 재미있는 점은 자유낙하 중 '떨어지는 느낌'보다 '바람에 떠 있는 느낌'에 가깝다는 것입니다. 낙하산 개방 후 평화로운 캐노피 비행은 완전히 다른 감동을 줍니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">AFF</div>
+      <div class="faq-q">AFF 과정 중 레벨을 재수강해야 하나요?</div>
+      <div class="faq-a">
+        기술 기준을 충족하지 못하면 해당 레벨을 반복해야 합니다. 이는 실패가 아니라 정상적인 과정입니다. 평균적으로 수강생의 30~40%는 최소 한 레벨을 재수강합니다. 재수강은 추가 비용이 발생하지만 안전을 위해 필수적입니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">여성</div>
+      <div class="faq-q">여성도 스카이다이빙을 배울 수 있나요?</div>
+      <div class="faq-a">
+        물론입니다. 스카이다이빙은 성별보다 정신적 집중력, 체계적 학습 능력, 기본 체력이 더 중요한 스포츠입니다. 전 세계 스카이다이버의 약 15~20%가 여성이며, 세계 챔피언십에서 여성 스카이다이버가 활약하고 있습니다. 체중 기준만 충족하면 동일한 훈련 과정을 거칩니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">날씨</div>
+      <div class="faq-q">날씨 때문에 점프가 취소되면 어떻게 되나요?</div>
+      <div class="faq-a">
+        DZ 정책에 따라 다르지만 대부분 날씨로 인한 취소 시 전액 환불 또는 일정 재조정이 가능합니다. 구름층, 풍속, 시정 등 여러 기상 조건이 모두 충족되어야 점프가 가능하므로, 특히 국내에서는 시즌과 날씨를 잘 확인하고 일정을 잡는 것이 중요합니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">윙슈트</div>
+      <div class="faq-q">스카이다이빙 없이 바로 윙슈트를 배울 수 있나요?</div>
+      <div class="faq-a">
+        절대 불가능합니다. 모든 공인 DZ와 윙슈트 제조사는 최소 200점프(많은 곳에서 300점프 권장) 이후 전문 강사에 의한 FFC 이수를 필수로 요구합니다. 윙슈트는 공기역학적으로 복잡해 예상치 못한 상황에서 즉각 대응하는 경험이 필요합니다. 충분한 경험 없이 시도하는 것은 생명을 위협합니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">장비</div>
+      <div class="faq-q">처음부터 장비를 구매해야 하나요?</div>
+      <div class="faq-a">
+        AFF 교육 중에는 DZ 장비를 대여합니다. 라이선스 취득 후에도 처음에는 대여를 권장합니다. 개인 장비 구매는 최소 50~100점프 이후 자신의 점프 스타일을 파악한 뒤 하는 것이 좋습니다. 신품 풀 장비 세트는 700만원~1,500만원 이상, 중고는 300만원대부터 시작합니다.
+      </div>
+    </div>
+    <div class="faq-item animate-in" onclick="toggleFaq(this)">
+      <div class="faq-tag">커리어</div>
+      <div class="faq-q">스카이다이빙 강사가 되려면?</div>
+      <div class="faq-a">
+        USPA 기준 AFF 강사(AFFI)가 되려면 최소 D 라이선스(500점프), 200회 이상의 감독 점프 등의 조건이 필요합니다. 탠덤 강사는 별도 자격 요건이 있습니다. 전업 강사가 되는 길은 길고 많은 투자가 필요하지만, 열정적인 커뮤니티와 함께하는 삶을 만들어갑니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EQUIPMENT -->
+<section class="equipment-section" id="equipment">
+  <div class="section-tag">필수 장비</div>
+  <h2 class="section-title">점프를<br><em>위한 장비</em></h2>
+  <p class="section-subtitle">스카이다이빙 장비를 이해하면 안전에 대한 자신감도 높아집니다. 각 장비의 역할을 파악하세요.</p>
+
+  <div class="equipment-grid">
+    <div class="equipment-card essential animate-in">
+      <div class="equipment-badge badge-essential">필수</div>
+      <div class="equip-icon">🎒</div>
+      <div class="equip-name">컨테이너 & 하네스</div>
+      <div class="equip-kr">장비 가방 & 몸통 고정 장치</div>
+      <div class="equip-body">주 낙하산과 예비 낙하산을 담는 가방과 몸에 고정하는 하네스의 통합 시스템. AAD(자동 활성화 장치)가 내장됩니다. 가장 중요하고 비싼 장비로, 개인 체형에 맞게 제작됩니다.</div>
+      <div class="equip-price">신품 KRW 3,000,000~7,000,000+</div>
+    </div>
+    <div class="equipment-card essential animate-in">
+      <div class="equipment-badge badge-essential">필수</div>
+      <div class="equip-icon">🪂</div>
+      <div class="equip-name">주 낙하산 (Main Canopy)</div>
+      <div class="equip-kr">메인 캐노피</div>
+      <div class="equip-body">사각형 또는 타원형의 램에어 낙하산. 입문자는 크고 느린 캐노피(190~230평방피트)를 사용합니다. 점프 실력이 늘면서 점점 작고 빠른 캐노피로 단계적으로 다운사이징합니다.</div>
+      <div class="equip-price">신품 KRW 1,500,000~3,500,000</div>
+    </div>
+    <div class="equipment-card essential animate-in">
+      <div class="equipment-badge badge-essential">필수</div>
+      <div class="equip-icon">🔴</div>
+      <div class="equip-name">예비 낙하산 (Reserve)</div>
+      <div class="equip-kr">리저브 캐노피</div>
+      <div class="equip-body">주 낙하산 오작동 시 사용하는 백업 시스템. 법적으로 정기 점검(리패킹)이 의무입니다. 일반적으로 180일마다 공인 리거(rigger)에 의해 점검 및 재팩킹해야 합니다.</div>
+      <div class="equip-price">신품 KRW 1,200,000~2,500,000</div>
+    </div>
+    <div class="equipment-card essential animate-in">
+      <div class="equipment-badge badge-essential">필수</div>
+      <div class="equip-icon">🤖</div>
+      <div class="equip-name">AAD (Cypres / MARS)</div>
+      <div class="equip-kr">자동 활성화 장치</div>
+      <div class="equip-body">설정된 고도(보통 300m)에서 일정 속도 이상으로 하강 중이면 자동으로 예비 낙하산을 개방하는 장치. 기절이나 불능 상태에서 생명을 구하는 마지막 안전망입니다. Cypress, VIGIL, MARS 브랜드가 유명합니다.</div>
+      <div class="equip-price">신품 KRW 700,000~1,500,000</div>
+    </div>
+    <div class="equipment-card animate-in">
+      <div class="equipment-badge badge-recommended">권장</div>
+      <div class="equip-icon">⛑️</div>
+      <div class="equip-name">헬멧</div>
+      <div class="equip-kr">스카이다이빙 전용 헬멧</div>
+      <div class="equip-body">오픈페이스형(입문자 권장)과 풀페이스형으로 나뉩니다. 오픈페이스는 시야와 청각을 유지하면서 머리를 보호합니다. 풀페이스는 고속에서 얼굴을 보호하며 카메라 장착도 가능합니다.</div>
+      <div class="equip-price">KRW 200,000~800,000</div>
+    </div>
+    <div class="equipment-card animate-in">
+      <div class="equipment-badge badge-recommended">권장</div>
+      <div class="equip-icon">🥽</div>
+      <div class="equip-name">고글</div>
+      <div class="equip-kr">스카이다이빙 고글</div>
+      <div class="equip-body">자유낙하 중 200km/h+ 강풍으로부터 눈을 보호합니다. 안경 위에 착용 가능한 OTG(Over The Glasses) 타입도 있습니다. 풀페이스 헬멧에는 통합 바이저가 있어 별도 고글이 필요 없습니다.</div>
+      <div class="equip-price">KRW 30,000~150,000</div>
+    </div>
+    <div class="equipment-card animate-in">
+      <div class="equipment-badge badge-recommended">권장</div>
+      <div class="equip-icon">⌚</div>
+      <div class="equip-name">고도계 (Altimeter)</div>
+      <div class="equip-kr">알티미터</div>
+      <div class="equip-body">현재 고도를 실시간으로 표시하는 장치. 아날로그 손목형이 기본이며, 디지털 음성 고도계는 특정 고도에서 음성으로 알림을 줍니다. 입문 단계에서 아날로그 시각 고도계가 가장 중요한 장비 중 하나입니다.</div>
+      <div class="equip-price">KRW 150,000~500,000</div>
+    </div>
+    <div class="equipment-card animate-in">
+      <div class="equipment-badge badge-recommended">선택</div>
+      <div class="equip-icon">📡</div>
+      <div class="equip-name">점프수트</div>
+      <div class="equip-kr">스카이다이빙 수트</div>
+      <div class="equip-body">공기 저항을 조절하는 전용 수트. 격자 무늬(그리드) 수트는 느린 팀원과 맞추기 위해 저항을 늘리고, 슬릭 수트는 빠른 낙하를 위해 저항을 줄입니다. 입문 시에는 DZ 대여 수트 사용도 무방합니다.</div>
+      <div class="equip-price">KRW 200,000~700,000</div>
+    </div>
+    <div class="equipment-card animate-in">
+      <div class="equipment-badge badge-recommended">선택</div>
+      <div class="equip-icon">🎥</div>
+      <div class="equip-name">카메라 시스템</div>
+      <div class="equip-kr">공중 촬영 장비</div>
+      <div class="equip-body">헬멧에 장착하는 GoPro 또는 전문 스카이다이빙 카메라. 중요: 최소 200점프 이전에는 사용을 강력히 비권장합니다. 카메라는 낙하산 라인에 걸릴 위험이 있으며, 조작에 집중하다 핵심 절차를 잊는 사고가 발생합니다.</div>
+      <div class="equip-price">KRW 300,000~2,000,000+</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SAFETY -->
+<section class="safety-section" id="safety">
+  <div class="section-tag">안전 원칙</div>
+  <h2 class="section-title">절대<br><em>지켜야 할 것</em></h2>
+  <p class="section-subtitle">안전이 최우선입니다. 이 원칙들을 가볍게 여기지 마세요.</p>
+
+  <div class="safety-grid">
+    <div class="safety-card animate-in">
+      <span class="safety-icon">🚫</span>
+      <div class="safety-title">절대 음주/약물 상태 점프 금지</div>
+      <div class="safety-body">
+        알코올, 마약, 판단력에 영향을 주는 약물을 복용한 상태에서는 절대 점프하지 않습니다. 처방약도 주의가 필요하며, 강사나 DZ 관리자에게 반드시 고지해야 합니다. 인지 능력 저하는 치명적입니다.
+      </div>
+    </div>
+    <div class="safety-card animate-in">
+      <span class="safety-icon">📋</span>
+      <div class="safety-title">체크리스트 & 브리핑 준수</div>
+      <div class="safety-body">
+        매 점프 전 장비 점검과 브리핑을 건너뛰지 않습니다. 아무리 경험이 많아도 체크리스트는 필수입니다. 익숙함에서 오는 방심이 사고의 주요 원인입니다. 점프 전 HALPS(Helmet, Altimeter, Log book, Packing card, Safety) 체크를 습관화하세요.
+      </div>
+    </div>
+    <div class="safety-card animate-in">
+      <span class="safety-icon">🌤️</span>
+      <div class="safety-title">날씨 조건 판단</div>
+      <div class="safety-body">
+        <ul>
+          <li>구름 아래 점프: 최소 가시거리 확보 필수</li>
+          <li>풍속 15~20knot 이상: 착지 위험 증가</li>
+          <li>낮은 운저고: 캐노피 비행 시간 부족</li>
+          <li>번개/폭풍: 즉시 점프 중단</li>
+          <li>항상 DZ 마스터의 날씨 판단을 따를 것</li>
+        </ul>
+      </div>
+    </div>
+    <div class="safety-card animate-in">
+      <span class="safety-icon">🔧</span>
+      <div class="safety-title">장비 정기 점검</div>
+      <div class="safety-body">
+        <ul>
+          <li>예비 낙하산: 180일마다 공인 리거 점검</li>
+          <li>AAD: 제조사 지정 점검 주기 준수</li>
+          <li>캐노피: 세탁, 찢김, 마모 정기 확인</li>
+          <li>하네스: 버클, 웨빙 마모 점검</li>
+          <li>자신의 장비 구조를 완전히 이해할 것</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SKY<span>ENTRY</span></div>
+  <div class="footer-tagline">스카이다이빙 & 윙슈트 입문 가이드</div>
+  <div class="footer-links">
+    <a href="#basics">기초 지식</a>
+    <a href="#learning">교육 과정</a>
+    <a href="#countries">국가별 비교</a>
+    <a href="#fitness">체력 준비</a>
+    <a href="#wingsuit">윙슈트</a>
+    <a href="#faq">FAQ</a>
+    <a href="#equipment">장비</a>
+    <a href="#safety">안전 원칙</a>
+  </div>
+  <div class="footer-disclaimer">
+    이 사이트의 정보는 교육적 목적으로 제공됩니다. 실제 스카이다이빙 훈련은 반드시 인증된 강사와 공인 DZ(Drop Zone)에서만 진행하세요. 스카이다이빙은 고위험 스포츠이며, 모든 결정은 자신의 책임 하에 이루어져야 합니다.
+    <br><br>
+    © 2026 SkyEntry — 하늘의 문을 열어드립니다
+  </div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursorTrail');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+    }, 80);
+  });
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+  // FAQ TOGGLE
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  // SMOOTH ACTIVE NAV
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--sky-cyan)' : '';
+    });
+  });
+
+  // NAV TOGGLE
+  function toggleNav() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = '';
+    } else {
+      Object.assign(links.style, {
+        display: 'flex', flexDirection: 'column',
+        position: 'fixed', top: '70px', left: 0, right: 0,
+        background: 'var(--sky-dark)', padding: '20px 30px',
+        gap: '16px', zIndex: 999, borderBottom: '1px solid var(--glass-border)'
+      });
+    }
+  }
+
+  // 모바일 nav 링크 클릭 시 메뉴 닫기
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      const links = document.querySelector('.nav-links');
+      links.style.display = '';
+    });
+  });
+
+  // PARALLAX HERO BG (grid는 CSS animation과 충돌 방지를 위해 bg에만 적용)
+  window.addEventListener('scroll', () => {
+    const bg = document.querySelector('.hero-bg');
+    if (bg) bg.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+  });
+</script>
 </body>
 </html>
