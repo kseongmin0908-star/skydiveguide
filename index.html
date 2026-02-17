@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkyEntry — 스카이다이빙 & 윙슈트 입문 가이드</title>
+<title>SkyEntry — 스카이다이빙 · 패러글라이딩 · 윙슈트 입문 가이드</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<meta property="og:title" content="SkyEntry — 스카이다이빙 & 윙슈트 입문 가이드">
-<meta property="og:description" content="AFF 교육과정부터 국가별 훈련 옵션, 필수 체력 준비까지 — 당신의 첫 점프를 위한 모든 것이 여기 있습니다.">
+<meta property="og:title" content="SkyEntry — 스카이다이빙 · 패러글라이딩 · 윙슈트 입문 가이드">
+<meta property="og:description" content="스카이다이빙, 패러글라이딩, 윙슈트 입문을 위한 완전한 가이드. 교육과정·비용·장비·국내 명소까지 — 하늘을 향한 첫 걸음을 시작하세요.">
 <meta property="og:image" content="https://skydiveguide.pages.dev/photo.png">
 <meta property="og:url" content="https://skydiveguide.pages.dev">
 <meta property="og:type" content="website">
@@ -271,6 +271,94 @@
     max-width: 600px;
     line-height: 1.8;
     margin-bottom: 60px;
+  }
+
+  /* COMPARE SECTION */
+  .compare-section { background: var(--sky-black); }
+  .compare-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .compare-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 36px 32px;
+    position: relative;
+    transition: all 0.4s;
+  }
+  .compare-card:hover { background: rgba(0,212,255,0.05); transform: translateY(-4px); }
+  .compare-card-featured {
+    border-color: rgba(76,255,145,0.3);
+    background: rgba(76,255,145,0.03);
+  }
+  .compare-card-featured:hover { background: rgba(76,255,145,0.07); }
+  .compare-featured-label {
+    position: absolute;
+    top: 0; right: 0;
+    background: #4cff91;
+    color: var(--sky-black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 3px 14px;
+  }
+  .compare-icon { font-size: 40px; margin-bottom: 16px; }
+  .compare-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .compare-tag-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    margin-bottom: 24px;
+  }
+  .compare-rows { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+  .compare-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+  }
+  .cr-label { color: var(--text-muted); white-space: nowrap; }
+  .cr-val { color: var(--sky-white); text-align: right; }
+  .cr-good { color: #4cff91; }
+  .cr-mid { color: var(--accent-yellow); }
+  .cr-danger { color: #ff6b6b; }
+  .compare-for {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    text-align: center;
+  }
+  .compare-for strong { color: var(--sky-white); display: block; margin-top: 4px; }
+  .compare-note {
+    margin-top: 40px;
+    padding: 28px 36px;
+    background: rgba(0,212,255,0.04);
+    border: 1px solid rgba(0,212,255,0.15);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .compare-note p { font-size: 14px; color: rgba(232,244,255,0.75); line-height: 1.9; }
+  .compare-note strong { color: var(--sky-cyan); }
+  @media (max-width: 1024px) {
+    .compare-cards { grid-template-columns: 1fr; gap: 16px; }
   }
 
   /* KNOWLEDGE SECTION */
@@ -623,7 +711,7 @@
     margin-bottom: 4px;
   }
   .req-text p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-  .wingsuit-types { }
+  .wingsuit-types { display: block; }
   .wtype-card {
     background: var(--glass);
     border: 1px solid var(--glass-border);
@@ -653,6 +741,97 @@
   .level-intermediate { color: var(--accent-yellow); border-color: rgba(255,215,0,0.3); }
   .level-advanced { color: var(--accent-orange); border-color: rgba(255,107,53,0.3); }
   .wtype-body { font-size: 13px; color: rgba(232,244,255,0.65); line-height: 1.8; }
+
+  /* PARAGLIDING */
+  .para-section { background: linear-gradient(180deg, var(--sky-dark) 0%, rgba(10,95,160,0.08) 50%, var(--sky-dark) 100%); }
+  .para-path { margin-top: 40px; position: relative; padding-left: 0; }
+  .para-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    margin-bottom: 24px;
+    align-items: start;
+  }
+  .para-step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--sky-cyan);
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    letter-spacing: 2px;
+  }
+  .para-step-content {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 24px 28px;
+  }
+  .para-step-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .para-step-content p { font-size: 14px; color: rgba(232,244,255,0.65); line-height: 1.8; margin-bottom: 12px; }
+  .para-sites-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .para-site-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 28px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .para-site-card:hover { border-color: rgba(0,212,255,0.35); transform: translateY(-3px); }
+  .para-site-top { border-color: rgba(255,215,0,0.3); background: rgba(255,215,0,0.03); }
+  .para-site-badge {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--accent-yellow);
+    color: var(--sky-black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 3px 12px;
+  }
+  .para-site-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .para-site-sub { font-size: 12px; color: var(--sky-cyan); font-family: 'Space Mono', monospace; margin-bottom: 14px; letter-spacing: 1px; }
+  .para-site-body { font-size: 13px; color: rgba(232,244,255,0.65); line-height: 1.8; margin-bottom: 14px; }
+  .para-equip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 40px;
+  }
+  .para-equip-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 32px;
+    transition: all 0.3s;
+  }
+  .para-equip-card:hover { background: rgba(0,212,255,0.05); }
+  @media (max-width: 1024px) {
+    .para-sites-grid { grid-template-columns: 1fr 1fr; }
+    .para-equip-grid { grid-template-columns: 1fr 1fr; }
+    .para-step { grid-template-columns: 60px 1fr; gap: 16px; }
+  }
+  @media (max-width: 640px) {
+    .para-sites-grid { grid-template-columns: 1fr; }
+    .para-equip-grid { grid-template-columns: 1fr; }
+    .para-step { grid-template-columns: 1fr; }
+    .para-step-num { height: 50px; font-size: 28px; }
+  }
 
   /* FAQ */
   .faq-section { background: var(--sky-black); }
@@ -880,13 +1059,13 @@
 <nav>
   <a class="nav-logo" href="#">SKY<span>ENTRY</span></a>
   <ul class="nav-links">
-    <li><a href="#basics">기초지식</a></li>
-    <li><a href="#learning">교육과정</a></li>
-    <li><a href="#countries">국가별비교</a></li>
-    <li><a href="#fitness">체력준비</a></li>
+    <li><a href="#compare">3종목비교</a></li>
+    <li><a href="#basics">스카이다이빙</a></li>
+    <li><a href="#paragliding">패러글라이딩</a></li>
     <li><a href="#wingsuit">윙슈트</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#countries">국가별비교</a></li>
     <li><a href="#equipment">장비</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#safety">안전</a></li>
   </ul>
   <button class="nav-toggle" onclick="toggleNav()">☰</button>
@@ -903,12 +1082,12 @@
     <span class="line3">도약</span>
   </h1>
   <p class="hero-desc">
-    스카이다이빙과 윙슈트 입문을 위한 완전한 가이드.<br>
-    AFF 교육과정부터 국가별 훈련 옵션, 필수 체력 준비까지 —<br>
-    당신의 첫 점프를 위한 모든 것이 여기 있습니다.
+    스카이다이빙 · 패러글라이딩 · 윙슈트 입문을 위한 완전한 가이드.<br>
+    교육과정부터 비용, 국내 명소, 장비까지 —<br>
+    하늘을 향한 당신의 첫 걸음을 위한 모든 것이 여기 있습니다.
   </p>
   <div class="hero-cta">
-    <a href="#basics" class="btn-primary">입문 시작하기</a>
+    <a href="#compare" class="btn-primary">3종목 비교하기</a>
     <a href="#faq" class="btn-secondary">자주 묻는 질문</a>
   </div>
   <div class="hero-stats">
@@ -930,6 +1109,79 @@
     스크롤하여 탐색
   </div>
 </section>
+
+<div class="divider"></div>
+
+<!-- COMPARE -->
+<section class="compare-section" id="compare">
+  <div class="section-tag">3종목 비교</div>
+  <h2 class="section-title">나에게 맞는<br><em>하늘은?</em></h2>
+  <p class="section-subtitle">스카이다이빙, 패러글라이딩, 윙슈트는 모두 하늘을 나는 스포츠지만 성격이 전혀 다릅니다. 먼저 비교하고 방향을 정하세요.</p>
+
+  <div class="compare-cards animate-in">
+    <div class="compare-card">
+      <div class="compare-icon">🪂</div>
+      <div class="compare-name">스카이다이빙</div>
+      <div class="compare-tag-badge" style="background:rgba(0,212,255,0.1);color:var(--sky-cyan);border:1px solid rgba(0,212,255,0.3);">SKYDIVING</div>
+      <div class="compare-rows">
+        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">약 6~7분</span></div>
+        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">자유낙하 200km/h</span></div>
+        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val">없음 (탠덤 즉시 가능)</span></div>
+        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">200~350만원</span></div>
+        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">800만원~ (중고 500~)</span></div>
+        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-mid">보통 (해외 교육 권장)</span></div>
+        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★★☆</span></div>
+        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-mid">중간</span></div>
+        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">강렬 · 짧은 자유감</span></div>
+      </div>
+      <div class="compare-for">이런 분께 추천<br><strong>강렬한 한 방의 자유를 원하는 분</strong></div>
+    </div>
+
+    <div class="compare-card compare-card-featured">
+      <div class="compare-featured-label">입문 추천</div>
+      <div class="compare-icon">🪁</div>
+      <div class="compare-name">패러글라이딩</div>
+      <div class="compare-tag-badge" style="background:rgba(76,255,145,0.1);color:#4cff91;border:1px solid rgba(76,255,145,0.3);">PARAGLIDING</div>
+      <div class="compare-rows">
+        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">20분~수 시간</span></div>
+        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">30~55km/h</span></div>
+        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val">없음 (교육 등록)</span></div>
+        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">80~150만원</span></div>
+        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">500~800만원 (중고 150~)</span></div>
+        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-good">매우 좋음 (전국 스쿨)</span></div>
+        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★☆☆</span></div>
+        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-mid">중간</span></div>
+        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">평화 · 긴 비행 · 풍경</span></div>
+      </div>
+      <div class="compare-for">이런 분께 추천<br><strong>오래, 자유롭게 하늘을 날고 싶은 분</strong></div>
+    </div>
+
+    <div class="compare-card">
+      <div class="compare-icon">🦅</div>
+      <div class="compare-name">윙슈트</div>
+      <div class="compare-tag-badge" style="background:rgba(255,107,53,0.1);color:var(--accent-orange);border:1px solid rgba(255,107,53,0.3);">WINGSUIT</div>
+      <div class="compare-rows">
+        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">약 2~3분</span></div>
+        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">수평 150~250km/h</span></div>
+        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val cr-danger">스카이다이빙 200회+</span></div>
+        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">FFC 과정 별도</span></div>
+        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">스카이다이빙 + 50~100만원</span></div>
+        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-danger">매우 어려움</span></div>
+        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★★★</span></div>
+        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-danger">높음</span></div>
+        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">새처럼 날기 · 극한 비행</span></div>
+      </div>
+      <div class="compare-for">이런 분께 추천<br><strong>스카이다이빙 경험 후 극한에 도전하려는 분</strong></div>
+    </div>
+  </div>
+
+  <div class="compare-note animate-in">
+    <span style="color:var(--sky-cyan);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">// TIP</span>
+    <p>처음이라면 <strong>패러글라이딩</strong>이 국내 접근성·비용 면에서 가장 유리합니다. 강렬한 한 방을 원한다면 <strong>탠덤 스카이다이빙</strong>으로 먼저 체험해 보세요. 윙슈트는 충분한 경험 후의 목표로 삼으세요.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
 
 <!-- BASICS -->
 <section class="knowledge-bg" id="basics">
@@ -1462,6 +1714,142 @@
 
 <div class="divider"></div>
 
+<!-- PARAGLIDING -->
+<section class="para-section" id="paragliding">
+  <div class="section-tag">패러글라이딩</div>
+  <h2 class="section-title">바람을<br><em>타다</em></h2>
+  <p class="section-subtitle">엔진 없이 오직 바람과 날개만으로 하늘을 유영합니다. 3종목 중 국내 접근성이 가장 높고, 비행 시간이 가장 길며, 자연과 가장 가까운 스포츠입니다.</p>
+
+  <!-- 교육과정 -->
+  <div class="section-tag" style="margin-top:60px;">교육 과정 — KPA 자격증 체계</div>
+  <div class="para-path animate-in">
+    <div class="para-step">
+      <div class="para-step-num">P1</div>
+      <div class="para-step-content">
+        <h3>입문 과정</h3>
+        <p>지상 조작, 이륙·착륙 기초, 저고도 단독 비행. 교관 감독 하 지정 활공장에서만 비행 가능. 교육비 약 <strong>70만원</strong>, 기간 1~2개월(주말반).</p>
+        <div class="path-tags"><span class="tag blue">단독 비행 5회+</span><span class="tag">필기 없음</span></div>
+      </div>
+    </div>
+    <div class="para-step">
+      <div class="para-step-num">P2</div>
+      <div class="para-step-content">
+        <h3>초급 과정 (연습조종사)</h3>
+        <p>실질적인 "혼자 날 수 있는" 기본 자격. 지정 활공장 단독 비행 가능. 교육비 약 <strong>70~80만원</strong> 추가, 누적 기간 3~6개월.</p>
+        <div class="path-tags"><span class="tag blue">단독 비행 20회+</span><span class="tag">필기 합격</span><span class="tag gold">핵심 자격</span></div>
+      </div>
+    </div>
+    <div class="para-step">
+      <div class="para-step-num">P3</div>
+      <div class="para-step-content">
+        <h3>중급 과정</h3>
+        <p>열기류(Thermal) 활용 상승 비행, 크로스컨트리(XC) 장거리 비행 입문. 기상 판단 능력이 핵심. 교육비 약 <strong>80만원</strong>.</p>
+        <div class="path-tags"><span class="tag blue">50회+</span><span class="tag">열기류 비행</span><span class="tag gold">XC 비행</span></div>
+      </div>
+    </div>
+    <div class="para-step">
+      <div class="para-step-num">P4</div>
+      <div class="para-step-content">
+        <h3>고급 과정 / 지도자</h3>
+        <p>어크로배틱, 대회 참가, 타인 교육 가능 수준. 수년간의 경험과 200회 이상 비행이 요구됩니다.</p>
+        <div class="path-tags"><span class="tag gold">200회+</span><span class="tag">대회 참가 가능</span><span class="tag blue">교육 가능</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 국내 활공장 -->
+  <div class="section-tag" style="margin-top:80px;">국내 주요 활공장</div>
+  <p style="font-size:14px;color:var(--text-muted);margin-bottom:40px;line-height:1.8;">전국 100개 이상의 이륙장이 있습니다. 대표 명소를 소개합니다.</p>
+  <div class="para-sites-grid animate-in">
+    <div class="para-site-card para-site-top">
+      <div class="para-site-badge">국내 최고</div>
+      <div class="para-site-name">🏔 단양 (충북)</div>
+      <div class="para-site-sub">두악산·양방산 활공장</div>
+      <p class="para-site-body">국내 패러글라이딩의 성지. 연 <strong>300일 이상</strong> 비행 가능. 전국 최다 클럽·스쿨 집중. 단양 시가지를 내려다보는 절경.</p>
+      <div class="path-tags"><span class="tag blue">연 300일+</span><span class="tag gold">스쿨 최다</span></div>
+    </div>
+    <div class="para-site-card">
+      <div class="para-site-name">⛰ 영월 (강원)</div>
+      <div class="para-site-sub">전국 최대 높이 이륙장</div>
+      <p class="para-site-body">해발 <strong>800m</strong>의 전국 최고 높이 이륙장. 다른 지역보다 2배 긴 비행 가능. 남한강과 산의 조화.</p>
+      <div class="path-tags"><span class="tag blue">800m 이륙</span><span class="tag">장비행 적합</span></div>
+    </div>
+    <div class="para-site-card">
+      <div class="para-site-name">🌿 양평 (경기)</div>
+      <div class="para-site-sub">서울 최근접 명소</div>
+      <p class="para-site-body">서울에서 약 1시간 거리. 유명산 활공장(해발 862m). 주말 교육생이 가장 많이 모이는 곳.</p>
+      <div class="path-tags"><span class="tag blue">서울 1시간</span><span class="tag">주말 교육 활성</span></div>
+    </div>
+    <div class="para-site-card">
+      <div class="para-site-name">❄ 평창 (강원)</div>
+      <div class="para-site-sub">장암산 해발 836m</div>
+      <p class="para-site-body">대관령 고원지대의 탁 트인 경관. 사계절 아름다운 자연환경 속 비행.</p>
+      <div class="path-tags"><span class="tag blue">836m</span><span class="tag">고원 비행</span></div>
+    </div>
+    <div class="para-site-card">
+      <div class="para-site-name">🌊 보령 (충남)</div>
+      <div class="para-site-sub">서해 해안 비행</div>
+      <p class="para-site-body">아름다운 서해 해변과 바다를 내려다보며 비행. 해안 지형 비행 특유의 경험.</p>
+      <div class="path-tags"><span class="tag blue">해안 비행</span><span class="tag">서해 절경</span></div>
+    </div>
+    <div class="para-site-card">
+      <div class="para-site-name">🍊 제주</div>
+      <div class="para-site-sub">금오름·서우봉</div>
+      <p class="para-site-body">한라산 조망, 에메랄드 바다 위 비행. 바람이 강해 <strong>중급 이상 권장</strong>. 관광과 병행 가능.</p>
+      <div class="path-tags"><span class="tag">중급 이상</span><span class="tag blue">한라산 조망</span></div>
+    </div>
+  </div>
+
+  <!-- 패러글라이딩 장비 -->
+  <div class="section-tag" style="margin-top:80px;">주요 장비</div>
+  <div class="para-equip-grid animate-in">
+    <div class="para-equip-card">
+      <div class="equip-icon">🪁</div>
+      <div class="equip-name">글라이더 (캐노피)</div>
+      <div class="equip-kr">EN A → B → C → D 등급</div>
+      <div class="equip-body">날개 역할을 하는 핵심 장비. 입문자는 반드시 <strong>EN A 등급</strong>(가장 안정적) 사용. 실력이 늘면서 EN B→C→D로 단계적 업그레이드.</div>
+      <div class="equip-price">신품 250~400만원 / 중고 50~150만원</div>
+    </div>
+    <div class="para-equip-card">
+      <div class="equip-icon">🪑</div>
+      <div class="equip-name">하네스</div>
+      <div class="equip-kr">조종사가 앉는 시트</div>
+      <div class="equip-body">조종사가 앉는 장비. 비상낙하산이 내장되어 있어 위급 시 사용. 등 보호대와 에어백 내장 여부 확인 필요.</div>
+      <div class="equip-price">신품 50~120만원</div>
+    </div>
+    <div class="para-equip-card">
+      <div class="equip-icon">🔴</div>
+      <div class="equip-name">비상낙하산</div>
+      <div class="equip-kr">Reserve Parachute</div>
+      <div class="equip-body">글라이더 완전 붕괴 등 비상 상황에서 사용하는 백업 장치. 정기 리패킹 필수. 스카이다이빙의 예비 낙하산과 동일 개념.</div>
+      <div class="equip-price">신품 70~150만원</div>
+    </div>
+    <div class="para-equip-card">
+      <div class="equip-icon">📡</div>
+      <div class="equip-name">바리오미터</div>
+      <div class="equip-kr">Variometer (고도·상승 속도계)</div>
+      <div class="equip-body">현재 고도와 상승·하강 속도를 실시간으로 알려주는 필수 계기. 열기류 탐지에 핵심. 음성·알람 기능 있는 GPS 바리오가 표준.</div>
+      <div class="equip-price">20~80만원</div>
+    </div>
+    <div class="para-equip-card">
+      <div class="equip-icon">⛑️</div>
+      <div class="equip-name">헬멧</div>
+      <div class="equip-kr">패러글라이딩 전용</div>
+      <div class="equip-body">풀페이스형 권장. 이착륙 시 머리 보호. 일반 자전거/오토바이 헬멧은 부적합.</div>
+      <div class="equip-price">15~50만원</div>
+    </div>
+    <div class="para-equip-card">
+      <div class="equip-icon">📻</div>
+      <div class="equip-name">무전기</div>
+      <div class="equip-kr">교관과 공중 통신</div>
+      <div class="equip-body">교육 중 지상 교관과 실시간 소통 필수. 항공용 주파수(136~174MHz) 무전기 사용. 초보자에게 특히 중요.</div>
+      <div class="equip-price">10~30만원</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="section-tag">자주 묻는 질문</div>
@@ -1697,17 +2085,18 @@
   <div class="footer-logo">SKY<span>ENTRY</span></div>
   <div class="footer-tagline">스카이다이빙 & 윙슈트 입문 가이드</div>
   <div class="footer-links">
-    <a href="#basics">기초 지식</a>
-    <a href="#learning">교육 과정</a>
+    <a href="#compare">3종목 비교</a>
+    <a href="#basics">스카이다이빙</a>
+    <a href="#paragliding">패러글라이딩</a>
+    <a href="#wingsuit">윙슈트</a>
     <a href="#countries">국가별 비교</a>
     <a href="#fitness">체력 준비</a>
-    <a href="#wingsuit">윙슈트</a>
-    <a href="#faq">FAQ</a>
     <a href="#equipment">장비</a>
+    <a href="#faq">FAQ</a>
     <a href="#safety">안전 원칙</a>
   </div>
   <div class="footer-disclaimer">
-    이 사이트의 정보는 교육적 목적으로 제공됩니다. 실제 스카이다이빙 훈련은 반드시 인증된 강사와 공인 DZ(Drop Zone)에서만 진행하세요. 스카이다이빙은 고위험 스포츠이며, 모든 결정은 자신의 책임 하에 이루어져야 합니다.
+    이 사이트의 정보는 교육적 목적으로 제공됩니다. 실제 훈련은 반드시 인증된 강사와 공인 기관에서만 진행하세요. 스카이다이빙·패러글라이딩·윙슈트는 고위험 스포츠이며, 모든 결정은 자신의 책임 하에 이루어져야 합니다.
     <br><br>
     © 2026 SkyEntry — 하늘의 문을 열어드립니다
   </div>
