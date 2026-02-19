@@ -1227,6 +1227,95 @@
   }
   @media (max-width: 640px) { .yt-grid { grid-template-columns: 1fr; } }
 
+  /* ===== VISUAL COMPARE SECTION ===== */
+  .compare-visual-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 36px;
+    align-items: start;
+  }
+  .cvg-card {
+    background: #fff;
+    border: 1.5px solid rgba(21,101,192,0.14);
+    border-radius: 20px;
+    padding: 28px 22px 22px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 16px rgba(21,101,192,0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  .cvg-card:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(21,101,192,0.13); }
+  .cvg-card.cvg-featured { border-color: rgba(46,125,50,0.28); box-shadow: 0 4px 24px rgba(46,125,50,0.10); }
+  .cvg-card.cvg-wing { border-color: rgba(229,92,0,0.20); }
+  .cvg-featured-label {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: #2e7d32; color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 4px 16px; border-radius: 99px; white-space: nowrap;
+  }
+  .cvg-emoji { font-size: 44px; text-align: center; margin-bottom: 6px; }
+  .cvg-name { font-size: 20px; font-weight: 800; color: #1a2d42; text-align: center; margin-bottom: 4px; }
+  .cvg-tagline { font-size: 12.5px; color: #4a6785; text-align: center; margin-bottom: 22px; line-height: 1.6; }
+  /* Meter bars */
+  .cvg-meters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+  .cvg-m-row { display: grid; grid-template-columns: 66px 1fr 60px; align-items: center; gap: 8px; }
+  .cvg-m-label { font-size: 11px; color: #4a6785; font-weight: 600; }
+  .cvg-m-track { height: 7px; background: rgba(21,101,192,0.09); border-radius: 99px; overflow: hidden; }
+  .cvg-m-fill { height: 100%; border-radius: 99px; background: #1565c0; }
+  .cvg-m-fill.g { background: #2e7d32; }
+  .cvg-m-fill.o { background: #e55c00; }
+  .cvg-m-val { font-size: 11px; font-weight: 700; color: #1a2d42; text-align: right; }
+  .cvg-sep { height: 1px; background: rgba(21,101,192,0.08); margin: 14px 0; }
+  /* Status pill */
+  .cvg-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 12px; border-radius: 99px; margin-bottom: 12px; align-self: flex-start;
+  }
+  .cvg-status.ok  { background: rgba(46,125,50,0.09);  color: #2e7d32; border: 1px solid rgba(46,125,50,0.22); }
+  .cvg-status.warn{ background: rgba(229,92,0,0.09);   color: #e55c00; border: 1px solid rgba(229,92,0,0.22); }
+  /* Fact pills */
+  .cvg-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .cvg-fact { font-size: 11px; color: #4a6785; background: #f4f8fe; border: 1px solid rgba(21,101,192,0.12); padding: 4px 10px; border-radius: 99px; }
+  /* For box */
+  .cvg-for { padding: 12px 14px; background: rgba(21,101,192,0.05); border-radius: 10px; border: 1px solid rgba(21,101,192,0.12); margin-top: auto; }
+  .cvg-card.cvg-featured .cvg-for { background: rgba(46,125,50,0.05); border-color: rgba(46,125,50,0.15); }
+  .cvg-card.cvg-wing    .cvg-for { background: rgba(229,92,0,0.05);  border-color: rgba(229,92,0,0.15); }
+  .cvg-for-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #1565c0; margin-bottom: 4px; }
+  .cvg-card.cvg-featured .cvg-for-label { color: #2e7d32; }
+  .cvg-card.cvg-wing    .cvg-for-label { color: #e55c00; }
+  .cvg-for-text { font-size: 12.5px; color: rgba(26,45,66,0.75); line-height: 1.65; }
+  /* Journey flow */
+  .cvg-journey {
+    background: #fff; border: 1.5px solid rgba(21,101,192,0.14);
+    border-radius: 16px; padding: 26px 28px; margin-bottom: 36px;
+    box-shadow: 0 2px 16px rgba(21,101,192,0.06);
+  }
+  .cvg-journey-title { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #1565c0; text-align: center; margin-bottom: 18px; }
+  .cvg-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+  .cvg-step {
+    text-align: center; padding: 11px 14px;
+    background: rgba(21,101,192,0.06); border-radius: 12px;
+    border: 1px solid rgba(21,101,192,0.14); min-width: 100px;
+  }
+  .cvg-step.s-para { background: rgba(46,125,50,0.05); border-color: rgba(46,125,50,0.18); }
+  .cvg-step.s-wing { background: rgba(229,92,0,0.05);  border-color: rgba(229,92,0,0.18); }
+  .cvg-step-n {
+    width: 22px; height: 22px; background: #1565c0; color: #fff;
+    border-radius: 50%; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 6px;
+  }
+  .cvg-step.s-para .cvg-step-n { background: #2e7d32; }
+  .cvg-step.s-wing .cvg-step-n { background: #e55c00; }
+  .cvg-step strong { font-size: 12px; color: #1a2d42; display: block; margin-bottom: 2px; }
+  .cvg-step span    { font-size: 11px; color: #4a6785; }
+  .cvg-arr { font-size: 18px; color: #b0c8e0; flex-shrink: 0; }
+  .cvg-or-label { font-size: 10px; color: #90b4d8; padding: 3px 8px; background: #f4f8fe; border-radius: 4px; border: 1px solid rgba(21,101,192,0.10); flex-shrink: 0; }
+  @media (max-width: 900px) { .compare-visual-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto 36px; } }
+  @media (max-width: 640px) { .cvg-journey { padding: 18px 14px; } .cvg-step { min-width: 80px; padding: 9px 10px; } .cvg-arr { font-size: 14px; } }
+
   /* ======================================================
      LIGHT THEME OVERRIDES
      다크 테마의 하드코딩된 rgba 값들을 라이트 테마로 교체
@@ -1602,66 +1691,172 @@
   <h2 class="section-title">나에게 맞는<br><em>하늘은?</em></h2>
   <p class="section-subtitle">스카이다이빙, 패러글라이딩, 윙슈트는 모두 하늘을 나는 스포츠지만 성격이 전혀 다릅니다. 먼저 비교하고 방향을 정하세요.</p>
 
-  <div class="compare-cards animate-in">
-    <div class="compare-card">
-      <div class="compare-icon">🪂</div>
-      <div class="compare-name">스카이다이빙</div>
-      <div class="compare-tag-badge" style="background:rgba(0,212,255,0.1);color:var(--sky-cyan);border:1px solid rgba(0,212,255,0.3);">SKYDIVING</div>
-      <div class="compare-rows">
-        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">약 6~7분</span></div>
-        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">자유낙하 200km/h</span></div>
-        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val">없음 (탠덤 즉시 가능)</span></div>
-        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">200~350만원</span></div>
-        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">800만원~ (중고 500~)</span></div>
-        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-mid">보통 (해외 교육 권장)</span></div>
-        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★★☆</span></div>
-        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-mid">중간</span></div>
-        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">강렬 · 짧은 자유감</span></div>
+  <!-- 비주얼 비교 카드 3개 -->
+  <div class="compare-visual-grid animate-in">
+
+    <!-- 스카이다이빙 -->
+    <div class="cvg-card">
+      <div class="cvg-emoji">🪂</div>
+      <div class="cvg-name">스카이다이빙</div>
+      <div class="cvg-tagline">비행기에서 뛰어내리는<br>강렬한 자유낙하 경험</div>
+      <div class="cvg-meters">
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">스릴 강도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:80%"></div></div>
+          <span class="cvg-m-val">높음</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비행 시간</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:15%"></div></div>
+          <span class="cvg-m-val">약 6분</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">입문 난이도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:25%"></div></div>
+          <span class="cvg-m-val">쉬움</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비용 수준</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:65%"></div></div>
+          <span class="cvg-m-val">높은 편</span>
+        </div>
       </div>
-      <div class="compare-for">이런 분께 추천<br><strong>강렬한 한 방의 자유를 원하는 분</strong></div>
+      <div class="cvg-sep"></div>
+      <span class="cvg-status ok">✅ 오늘 바로 체험 가능 (탠덤)</span>
+      <div class="cvg-facts">
+        <span class="cvg-fact">⏱️ 자유낙하 약 60초</span>
+        <span class="cvg-fact">💨 낙하 속도 200km/h</span>
+        <span class="cvg-fact">💰 탠덤 77만원~</span>
+        <span class="cvg-fact">📍 충주 DZ</span>
+      </div>
+      <div class="cvg-for">
+        <div class="cvg-for-label">이런 분께 맞아요</div>
+        <div class="cvg-for-text">짧고 강렬하게, 평생 잊지 못할 단 한 번의 경험을 원하는 분</div>
+      </div>
     </div>
 
-    <div class="compare-card compare-card-featured">
-      <div class="compare-featured-label">입문 추천</div>
-      <div class="compare-icon">🪁</div>
-      <div class="compare-name">패러글라이딩</div>
-      <div class="compare-tag-badge" style="background:rgba(76,255,145,0.1);color:#4cff91;border:1px solid rgba(76,255,145,0.3);">PARAGLIDING</div>
-      <div class="compare-rows">
-        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">20분~수 시간</span></div>
-        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">30~55km/h</span></div>
-        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val">없음 (교육 등록)</span></div>
-        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">80~150만원</span></div>
-        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">500~800만원 (중고 150~)</span></div>
-        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-good">매우 좋음 (전국 스쿨)</span></div>
-        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★☆☆</span></div>
-        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-mid">중간</span></div>
-        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">평화 · 긴 비행 · 풍경</span></div>
+    <!-- 패러글라이딩 -->
+    <div class="cvg-card cvg-featured">
+      <div class="cvg-featured-label">입문 추천</div>
+      <div class="cvg-emoji">🪁</div>
+      <div class="cvg-name">패러글라이딩</div>
+      <div class="cvg-tagline">산에서 활공하며 하늘을<br>오랫동안 자유롭게 나는 비행</div>
+      <div class="cvg-meters">
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">스릴 강도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:45%"></div></div>
+          <span class="cvg-m-val">적당</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비행 시간</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:100%"></div></div>
+          <span class="cvg-m-val">1시간~</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">입문 난이도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:18%"></div></div>
+          <span class="cvg-m-val">가장 쉬움</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비용 수준</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:42%"></div></div>
+          <span class="cvg-m-val">보통</span>
+        </div>
       </div>
-      <div class="compare-for">이런 분께 추천<br><strong>오래, 자유롭게 하늘을 날고 싶은 분</strong></div>
+      <div class="cvg-sep"></div>
+      <span class="cvg-status ok">✅ 교육 등록 즉시 시작</span>
+      <div class="cvg-facts">
+        <span class="cvg-fact">🏔️ 전국 100곳+ 스쿨</span>
+        <span class="cvg-fact">💰 체험 5~10만원~</span>
+        <span class="cvg-fact">🪁 자격증 80~150만원</span>
+        <span class="cvg-fact">🌤️ 조건 좋으면 수시간 비행</span>
+      </div>
+      <div class="cvg-for">
+        <div class="cvg-for-label">이런 분께 맞아요</div>
+        <div class="cvg-for-text">풍경을 감상하며 오래, 여유롭게 하늘을 날고 싶은 분</div>
+      </div>
     </div>
 
-    <div class="compare-card">
-      <div class="compare-icon">🦅</div>
-      <div class="compare-name">윙슈트</div>
-      <div class="compare-tag-badge" style="background:rgba(255,107,53,0.1);color:var(--accent-orange);border:1px solid rgba(255,107,53,0.3);">WINGSUIT</div>
-      <div class="compare-rows">
-        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">약 2~3분</span></div>
-        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">수평 150~250km/h</span></div>
-        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val cr-danger">스카이다이빙 200회+</span></div>
-        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">FFC 과정 별도</span></div>
-        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">스카이다이빙 + 50~100만원</span></div>
-        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-danger">매우 어려움</span></div>
-        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★★★</span></div>
-        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-danger">높음</span></div>
-        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">새처럼 날기 · 극한 비행</span></div>
+    <!-- 윙슈트 -->
+    <div class="cvg-card cvg-wing">
+      <div class="cvg-emoji">🦅</div>
+      <div class="cvg-name">윙슈트</div>
+      <div class="cvg-tagline">새처럼 수평 비행하는<br>극한의 스카이스포츠</div>
+      <div class="cvg-meters">
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">스릴 강도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:100%"></div></div>
+          <span class="cvg-m-val">최고</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비행 시간</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:18%"></div></div>
+          <span class="cvg-m-val">약 2~3분</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">입문 난이도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:100%"></div></div>
+          <span class="cvg-m-val">매우 어려움</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비용 수준</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:88%"></div></div>
+          <span class="cvg-m-val">매우 높음</span>
+        </div>
       </div>
-      <div class="compare-for">이런 분께 추천<br><strong>스카이다이빙 경험 후 극한에 도전하려는 분</strong></div>
+      <div class="cvg-sep"></div>
+      <span class="cvg-status warn">⚠️ 스카이다이빙 200회+ 필수</span>
+      <div class="cvg-facts">
+        <span class="cvg-fact">💨 수평 속도 200km/h</span>
+        <span class="cvg-fact">🔥 위험도 가장 높음</span>
+        <span class="cvg-fact">🎓 FFC 교육 과정 필요</span>
+      </div>
+      <div class="cvg-for">
+        <div class="cvg-for-label">이런 분께 맞아요</div>
+        <div class="cvg-for-text">스카이다이빙 경력을 쌓은 뒤 진정한 새처럼 나는 꿈에 도전하려는 분</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 추천 시작 여정 -->
+  <div class="cvg-journey animate-in">
+    <div class="cvg-journey-title">✈️ 처음이라면? — 추천 입문 순서</div>
+    <div class="cvg-flow">
+      <div class="cvg-step">
+        <div class="cvg-step-n">1</div>
+        <strong>풍동 체험</strong>
+        <span>실내에서 감각 먼저</span>
+      </div>
+      <div class="cvg-arr">→</div>
+      <div class="cvg-step">
+        <div class="cvg-step-n">2</div>
+        <strong>탠덤 점프</strong>
+        <span>강사와 첫 실외 점프</span>
+      </div>
+      <div class="cvg-or-label">또는</div>
+      <div class="cvg-step s-para">
+        <div class="cvg-step-n">2</div>
+        <strong>패러글라이딩</strong>
+        <span>교관과 첫 활공 비행</span>
+      </div>
+      <div class="cvg-arr">→</div>
+      <div class="cvg-step">
+        <div class="cvg-step-n">3</div>
+        <strong>자격증 취득</strong>
+        <span>AFF or 패러 P1~P4</span>
+      </div>
+      <div class="cvg-arr">→</div>
+      <div class="cvg-step s-wing">
+        <div class="cvg-step-n">4</div>
+        <strong>윙슈트 도전</strong>
+        <span>스카이다이빙 200회+</span>
+      </div>
     </div>
   </div>
 
   <div class="compare-note animate-in">
-    <span style="color:var(--sky-cyan);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">// TIP</span>
-    <p>처음이라면 <strong>패러글라이딩</strong>이 국내 접근성·비용 면에서 가장 유리합니다. 강렬한 한 방을 원한다면 <strong>탠덤 스카이다이빙</strong>으로 먼저 체험해 보세요. 윙슈트는 충분한 경험 후의 목표로 삼으세요.</p>
+    <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--sky-blue);">// 요약 TIP</span>
+    <p>처음이라면 <strong>패러글라이딩</strong>이 국내 접근성·비용 면에서 가장 유리합니다. 강렬한 한 방을 원한다면 <strong>탠덤 스카이다이빙</strong>으로 먼저 체험해 보세요. 윙슈트는 스카이다이빙을 충분히 경험한 뒤 목표로 삼으세요.</p>
   </div>
 </section>
 
