@@ -14,18 +14,18 @@
 <meta name="twitter:image" content="https://skydiveguide.pages.dev/photo.png">
 <style>
   :root {
-    --sky-black: #080c14;
-    --sky-dark: #0d1520;
-    --sky-mid: #0f2238;
-    --sky-blue: #0a5fa0;
-    --sky-bright: #1a9fff;
-    --sky-cyan: #00d4ff;
-    --sky-white: #e8f4ff;
-    --accent-orange: #ff6b35;
-    --accent-yellow: #ffd700;
-    --text-muted: #6a8aaa;
-    --glass: rgba(255,255,255,0.04);
-    --glass-border: rgba(0,212,255,0.15);
+    --sky-black: #f4f8fe;
+    --sky-dark: #e8f0fb;
+    --sky-mid: #d2e4f5;
+    --sky-blue: #1565c0;
+    --sky-bright: #1976d2;
+    --sky-cyan: #0277bd;
+    --sky-white: #1a2d42;
+    --accent-orange: #e55c00;
+    --accent-yellow: #d97706;
+    --text-muted: #4a6785;
+    --glass: rgba(255,255,255,0.95);
+    --glass-border: rgba(21,101,192,0.16);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1226,6 +1226,310 @@
     .community-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) { .yt-grid { grid-template-columns: 1fr; } }
+
+  /* ======================================================
+     LIGHT THEME OVERRIDES
+     다크 테마의 하드코딩된 rgba 값들을 라이트 테마로 교체
+  ====================================================== */
+
+  /* 커스텀 커서 제거 (비전문적) */
+  body { cursor: auto; }
+  .cursor, .cursor-trail { display: none; }
+
+  /* 스크롤바 */
+  ::-webkit-scrollbar-track { background: #e8f0fb; }
+  ::-webkit-scrollbar-thumb { background: #90b4d8; }
+
+  /* 네비게이션 */
+  nav {
+    background: rgba(255,255,255,0.97) !important;
+    border-bottom: 1px solid rgba(21,101,192,0.12);
+    box-shadow: 0 2px 20px rgba(21,101,192,0.08);
+  }
+  .nav-logo { color: #1565c0; }
+  .nav-logo span { color: #e55c00; }
+  .nav-links a { color: #4a6785; }
+  .nav-links a:hover { color: #1565c0; }
+  .nav-toggle { color: #1565c0 !important; }
+
+  /* 히어로 섹션 */
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 30%, rgba(21,101,192,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(2,119,189,0.06) 0%, transparent 60%),
+      linear-gradient(160deg, #f4f8fe 0%, #e0edf9 50%, #d2e5f7 100%);
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(21,101,192,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(21,101,192,0.05) 1px, transparent 1px);
+  }
+  .hero-altitude { color: #1976d2; }
+  .hero-title { color: #1a2d42; }
+  .hero-title .line2 { color: #0277bd; }
+  .hero-title .line3 { color: #e55c00; }
+  .hero-desc { color: rgba(26,45,66,0.72); }
+  .stat-num { color: #1565c0; }
+  .stat-label { color: #4a6785; }
+  .hero-scroll { color: #7a9bb5; }
+  .scroll-line { background: linear-gradient(90deg, transparent, #1565c0); }
+  .btn-primary { background: #1565c0; color: #ffffff; }
+  .btn-primary:hover { background: #0d47a1; transform: translateY(-2px); }
+  .btn-secondary { border-color: rgba(21,101,192,0.4); color: #1565c0; }
+  .btn-secondary:hover { background: rgba(21,101,192,0.08); }
+
+  /* 섹션 헤더 */
+  .section-tag { color: #1976d2; }
+  .section-tag::before { background: #1976d2; }
+  .section-title em { color: #0277bd; }
+  .section-subtitle { color: #4a6785; }
+
+  /* 구분선 */
+  .divider { background: linear-gradient(90deg, transparent, rgba(21,101,192,0.15), transparent); }
+
+  /* 공통 카드 — 흰 배경 + 부드러운 그림자 */
+  .compare-card,
+  .knowledge-card,
+  .path-content,
+  .country-card,
+  .fitness-card,
+  .wtype-card,
+  .para-step-content,
+  .para-site-card,
+  .para-equip-card,
+  .faq-item,
+  .equipment-card,
+  .safety-card,
+  .inst-card,
+  .yt-card,
+  .comm-card {
+    background: #ffffff;
+    border-color: rgba(21,101,192,0.12);
+    box-shadow: 0 2px 16px rgba(21,101,192,0.06);
+  }
+  .compare-card:hover,
+  .knowledge-card:hover,
+  .country-card:hover,
+  .fitness-card:hover,
+  .wtype-card:hover,
+  .para-site-card:hover,
+  .para-equip-card:hover,
+  .faq-item:hover,
+  .equipment-card:hover,
+  .inst-card:hover {
+    background: #f8fbff;
+    border-color: rgba(21,101,192,0.28);
+    box-shadow: 0 8px 32px rgba(21,101,192,0.12);
+  }
+
+  /* 카드 본문 텍스트 (하드코딩된 rgba(232,244,255,...) 전부 교체) */
+  .hero-desc,
+  .compare-note p,
+  .card-body,
+  .compare-for,
+  .path-content p,
+  .wingsuit-info p,
+  .req-text p,
+  .wtype-body,
+  .para-step-content p,
+  .para-site-body,
+  .para-equip-card .equip-body,
+  .faq-a,
+  .equip-body,
+  .safety-body,
+  .bmi-info-text p,
+  .inst-body,
+  .yt-desc,
+  .comm-desc,
+  .fitness-body {
+    color: rgba(26,45,66,0.7);
+  }
+
+  /* 카드 제목 */
+  .card-title,
+  .compare-name,
+  .country-name,
+  .fitness-title,
+  .path-content h3,
+  .wingsuit-info h2,
+  .wtype-name,
+  .para-step-content h3,
+  .para-site-name,
+  .equip-name,
+  .inst-name,
+  .yt-channel,
+  .comm-name,
+  .faq-q {
+    color: #1a2d42;
+  }
+
+  /* 배지·하이라이트 */
+  .card-highlight {
+    background: rgba(21,101,192,0.08);
+    border-color: rgba(21,101,192,0.25);
+    color: #1976d2;
+  }
+  .card-num { color: rgba(21,101,192,0.10); }
+
+  /* 태그 */
+  .tag { border-color: rgba(229,92,0,0.35); color: #e55c00; }
+  .tag.blue { border-color: rgba(21,101,192,0.30); color: #1565c0; }
+  .tag.gold { border-color: rgba(217,119,6,0.30); color: #d97706; }
+
+  /* 비교 섹션 */
+  .compare-rows { border-top-color: rgba(21,101,192,0.10); }
+  .compare-row { border-bottom-color: rgba(21,101,192,0.06); }
+  .cr-label { color: #4a6785; }
+  .cr-val { color: #1a2d42; }
+  .cr-good { color: #2e7d32; }
+  .cr-mid { color: #d97706; }
+  .cr-danger { color: #c62828; }
+  .compare-for {
+    background: rgba(21,101,192,0.04);
+    border-color: rgba(21,101,192,0.10);
+    color: #4a6785;
+  }
+  .compare-for strong { color: #1a2d42; }
+  .compare-note {
+    background: rgba(21,101,192,0.05);
+    border-color: rgba(21,101,192,0.18);
+  }
+  .compare-note strong { color: #1565c0; }
+  .compare-card-featured {
+    border-color: rgba(46,125,50,0.25) !important;
+    background: rgba(46,125,50,0.03) !important;
+  }
+  .compare-card-featured:hover { background: rgba(46,125,50,0.07) !important; }
+  .compare-featured-label { background: #2e7d32; color: #fff; }
+
+  /* 학습 경로 */
+  .path-timeline::before { background: linear-gradient(180deg, #1565c0, #90b4d8, transparent); }
+  .path-dot { background: #fff; border-color: #1565c0; }
+  .path-dot.active { background: #1565c0; box-shadow: 0 0 16px rgba(21,101,192,0.35); }
+  .path-step { color: #1976d2; }
+  .path-content::after { color: rgba(21,101,192,0.05); }
+
+  /* 국가 카드 */
+  .country-sub { color: #1976d2; }
+  .country-cost { color: #e55c00; }
+  .country-cost span { color: #4a6785; }
+  .country-best {
+    background: rgba(229,92,0,0.08);
+    border-color: rgba(229,92,0,0.22);
+    color: #e55c00;
+  }
+  .country-card.featured {
+    border-color: rgba(21,101,192,0.25) !important;
+    background: rgba(21,101,192,0.04) !important;
+  }
+  .country-card.featured::before { background: #1565c0; color: #fff; }
+  .pros h4 { color: #2e7d32; }
+  .cons h4 { color: #c62828; }
+  .pros ul, .cons ul { color: rgba(26,45,66,0.72); }
+  .pros li::before { color: #2e7d32; }
+  .cons li::before { color: #c62828; }
+
+  /* 체력 */
+  .fitness-exercises { color: #1976d2; border-top-color: rgba(21,101,192,0.12); }
+  .bmi-info {
+    background: rgba(229,92,0,0.05);
+    border-color: rgba(229,92,0,0.18);
+  }
+  .bmi-info-text h3 { color: #e55c00; }
+
+  /* 윙슈트 */
+  .wingsuit-section {
+    background: linear-gradient(180deg, #f4f8fe 0%, rgba(21,101,192,0.06) 50%, #f4f8fe 100%);
+  }
+  .wingsuit-section::before { color: rgba(21,101,192,0.04); }
+  .wingsuit-info h2 { color: #e55c00; }
+  .req-item { border-bottom-color: rgba(21,101,192,0.10); }
+  .req-num { color: #1565c0; }
+  .req-text h4 { color: #1a2d42; }
+  .wtype-header { border: none; }
+  .level-beginner { color: #2e7d32; border-color: rgba(46,125,50,0.30); }
+  .level-intermediate { color: #d97706; border-color: rgba(217,119,6,0.30); }
+  .level-advanced { color: #e55c00; border-color: rgba(229,92,0,0.30); }
+
+  /* 패러글라이딩 */
+  .para-section { background: #e8f0fb; }
+  .para-step-num {
+    color: #1976d2;
+    background: rgba(21,101,192,0.08);
+    border-color: rgba(21,101,192,0.20);
+  }
+  .para-site-top {
+    border-color: rgba(217,119,6,0.25) !important;
+    background: rgba(217,119,6,0.04) !important;
+  }
+  .para-site-badge { background: #d97706; color: #fff; }
+  .para-site-sub { color: #1976d2; }
+  .equip-kr { color: #4a6785; }
+  .equip-price { color: #e55c00; }
+
+  /* FAQ */
+  .faq-tag { color: #7a9bb5; }
+  .faq-q::after { color: #1565c0; }
+
+  /* 장비 */
+  .equipment-badge.badge-essential {
+    background: rgba(229,92,0,0.10);
+    color: #e55c00;
+  }
+  .equipment-badge.badge-recommended {
+    background: rgba(21,101,192,0.10);
+    color: #1565c0;
+  }
+
+  /* 안전 */
+  .safety-card {
+    background: rgba(229,92,0,0.04) !important;
+    border-color: rgba(229,92,0,0.15) !important;
+    box-shadow: 0 2px 16px rgba(229,92,0,0.05) !important;
+  }
+  .safety-title { color: #e55c00; }
+  .safety-body { color: rgba(26,45,66,0.72); }
+  .safety-body ul { color: rgba(26,45,66,0.70); }
+
+  /* 기관 */
+  .inst-location { color: #1976d2; }
+  .badge-sky { background: rgba(21,101,192,0.08); color: #1565c0; border-color: rgba(21,101,192,0.22); }
+  .badge-para { background: rgba(46,125,50,0.08); color: #2e7d32; border-color: rgba(46,125,50,0.22); }
+  .inst-link { background: rgba(21,101,192,0.08); border-color: rgba(21,101,192,0.25); color: #1565c0; }
+  .inst-link:hover { background: rgba(21,101,192,0.16); }
+  .inst-link.green { background: rgba(46,125,50,0.08); border-color: rgba(46,125,50,0.25); color: #2e7d32; }
+  .inst-link.green:hover { background: rgba(46,125,50,0.16); }
+  .inst-card.featured-sky { border-color: rgba(21,101,192,0.25) !important; background: rgba(21,101,192,0.03) !important; }
+  .inst-card.featured-para { border-color: rgba(46,125,50,0.25) !important; background: rgba(46,125,50,0.03) !important; }
+
+  /* 유튜브 카드 */
+  .yt-card::before { background: #1565c0; }
+  .yt-card:hover { border-color: rgba(21,101,192,0.32); background: #f8fbff; box-shadow: 0 8px 32px rgba(21,101,192,0.12); }
+  .yt-handle { color: #c62828; }
+  .yt-tag-sky { color: #1565c0; border-color: rgba(21,101,192,0.30); }
+  .yt-tag-para { color: #2e7d32; border-color: rgba(46,125,50,0.30); }
+  .yt-tag-wing { color: #e55c00; border-color: rgba(229,92,0,0.30); }
+  .yt-tag-kr { color: #d97706; border-color: rgba(217,119,6,0.30); }
+  .yt-tag-edu { color: #4a6785; border-color: rgba(74,103,133,0.30); }
+
+  /* 커뮤니티 */
+  .comm-card:hover { border-color: rgba(21,101,192,0.28); background: #f8fbff; }
+  .comm-link-text { color: #1565c0; }
+
+  /* 비교 노트 (기관·미디어 섹션 포함) */
+  .compare-note span { color: #1976d2 !important; }
+
+  /* 푸터 — 다크는 유지 (신뢰감·대비) */
+  footer {
+    background: #1a2d42;
+    border-top: none;
+  }
+  .footer-logo { color: #60a5fa; }
+  .footer-logo span { color: #fb923c; }
+  .footer-tagline { color: rgba(255,255,255,0.5); }
+  .footer-links a { color: rgba(255,255,255,0.5); }
+  .footer-links a:hover { color: #60a5fa; }
+  .footer-disclaimer { color: rgba(255,255,255,0.35); }
 </style>
 </head>
 <body>
@@ -2206,21 +2510,21 @@
         <span class="yt-tag yt-tag-sky">익스트림</span>
       </div>
     </a>
-    <a class="yt-card" href="https://www.youtube.com/@squirrelsuits" target="_blank" rel="noopener">
+    <a class="yt-card" href="https://www.youtube.com/results?search_query=wingsuit+flying+tutorial+proximity" target="_blank" rel="noopener">
       <span class="yt-thumb">🦅</span>
-      <div class="yt-channel">Squirrel</div>
-      <div class="yt-handle">@squirrelsuits</div>
-      <div class="yt-desc">세계 최고 윙슈트 제조사의 공식 채널. 장비 개발 과정, 파일럿 인터뷰, FFC 교육 영상, 프록시마이티 플라잉까지. 윙슈트를 꿈꾼다면 필수 구독.</div>
+      <div class="yt-channel">Wingsuit 검색</div>
+      <div class="yt-handle">YouTube 검색 바로가기</div>
+      <div class="yt-desc">Squirrel(squirrel.ws)은 세계 최고의 윙슈트 제조사입니다. 공식 YouTube 채널 URL이 자주 변경되므로, 이 링크로 최신 윙슈트 영상을 직접 검색하세요. "squirrel wingsuit" 검색도 추천합니다.</div>
       <div class="yt-tags">
         <span class="yt-tag yt-tag-wing">윙슈트</span>
-        <span class="yt-tag yt-tag-edu">교육</span>
-        <span class="yt-tag yt-tag-sky">장비 리뷰</span>
+        <span class="yt-tag yt-tag-edu">프록시마이티</span>
+        <span class="yt-tag yt-tag-sky">교육 영상</span>
       </div>
     </a>
-    <a class="yt-card" href="https://www.youtube.com/@ozoneparagliders" target="_blank" rel="noopener">
+    <a class="yt-card" href="https://www.youtube.com/@flyozone" target="_blank" rel="noopener">
       <span class="yt-thumb">🪁</span>
       <div class="yt-channel">Ozone Paragliders</div>
-      <div class="yt-handle">@ozoneparagliders</div>
+      <div class="yt-handle">@flyozone</div>
       <div class="yt-desc">세계 최대 패러글라이딩 장비 제조사. EN A입문 글라이더부터 고성능 경쟁 글라이더까지 비교 영상. 실제 비행 장면과 어크로배틱 영상 다수.</div>
       <div class="yt-tags">
         <span class="yt-tag yt-tag-para">패러글라이딩</span>
