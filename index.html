@@ -14,18 +14,18 @@
 <meta name="twitter:image" content="https://skydiveguide.pages.dev/photo.png">
 <style>
   :root {
-    --sky-black: #080c14;
-    --sky-dark: #0d1520;
-    --sky-mid: #0f2238;
-    --sky-blue: #0a5fa0;
-    --sky-bright: #1a9fff;
-    --sky-cyan: #00d4ff;
-    --sky-white: #e8f4ff;
-    --accent-orange: #ff6b35;
-    --accent-yellow: #ffd700;
-    --text-muted: #6a8aaa;
-    --glass: rgba(255,255,255,0.04);
-    --glass-border: rgba(0,212,255,0.15);
+    --sky-black: #f4f8fe;
+    --sky-dark: #e8f0fb;
+    --sky-mid: #d2e4f5;
+    --sky-blue: #1565c0;
+    --sky-bright: #1976d2;
+    --sky-cyan: #0277bd;
+    --sky-white: #1a2d42;
+    --accent-orange: #e55c00;
+    --accent-yellow: #d97706;
+    --text-muted: #4a6785;
+    --glass: rgba(255,255,255,0.95);
+    --glass-border: rgba(21,101,192,0.16);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1048,6 +1048,577 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* ===========================
+     INSTITUTIONS SECTION
+  =========================== */
+  .institutions-section { background: var(--sky-dark); }
+
+  .inst-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .inst-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 32px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .inst-card:hover { border-color: rgba(0,212,255,0.45); transform: translateY(-4px); }
+  .inst-card.featured-sky { border-color: rgba(0,212,255,0.3); background: rgba(0,212,255,0.04); }
+  .inst-card.featured-para { border-color: rgba(76,255,145,0.3); background: rgba(76,255,145,0.04); }
+  .inst-type-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    margin-bottom: 16px;
+  }
+  .badge-sky { background: rgba(0,212,255,0.1); color: var(--sky-cyan); border: 1px solid rgba(0,212,255,0.3); }
+  .badge-para { background: rgba(76,255,145,0.1); color: #4cff91; border: 1px solid rgba(76,255,145,0.3); }
+  .inst-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .inst-location {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--sky-cyan);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .inst-body { font-size: 13px; color: rgba(232,244,255,0.65); line-height: 1.8; margin-bottom: 16px; }
+  .inst-offers { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .inst-link {
+    display: inline-block;
+    padding: 9px 20px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--sky-cyan);
+    text-decoration: none;
+    font-size: 12px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  .inst-link:hover { background: rgba(0,212,255,0.18); transform: translateX(2px); }
+  .inst-link.green {
+    background: rgba(76,255,145,0.08);
+    border-color: rgba(76,255,145,0.3);
+    color: #4cff91;
+  }
+  .inst-link.green:hover { background: rgba(76,255,145,0.18); }
+  .inst-link.orange {
+    background: rgba(255,107,53,0.08);
+    border-color: rgba(255,107,53,0.3);
+    color: var(--accent-orange);
+  }
+  .inst-link.orange:hover { background: rgba(255,107,53,0.18); }
+  @media (max-width: 1024px) { .inst-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .inst-grid { grid-template-columns: 1fr; } }
+
+  /* ===========================
+     MEDIA / YOUTUBE / COMMUNITY
+  =========================== */
+  .media-section { background: var(--sky-black); }
+
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .yt-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 28px 24px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .yt-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: #ff0000;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .yt-card:hover { border-color: rgba(255,50,50,0.4); transform: translateY(-4px); background: rgba(255,20,20,0.04); }
+  .yt-card:hover::before { opacity: 1; }
+  .yt-thumb { font-size: 36px; margin-bottom: 14px; display: block; }
+  .yt-channel {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--sky-white);
+    margin-bottom: 4px;
+  }
+  .yt-handle {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #ff6b6b;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .yt-desc { font-size: 13px; color: rgba(232,244,255,0.6); line-height: 1.75; }
+  .yt-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .yt-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border: 1px solid;
+  }
+  .yt-tag-sky { color: var(--sky-cyan); border-color: rgba(0,212,255,0.35); }
+  .yt-tag-para { color: #4cff91; border-color: rgba(76,255,145,0.35); }
+  .yt-tag-wing { color: var(--accent-orange); border-color: rgba(255,107,53,0.35); }
+  .yt-tag-kr { color: var(--accent-yellow); border-color: rgba(255,215,0,0.35); }
+  .yt-tag-edu { color: var(--text-muted); border-color: rgba(106,138,170,0.35); }
+
+  .community-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .comm-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: all 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .comm-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-3px); background: rgba(0,212,255,0.04); }
+  .comm-icon { font-size: 32px; min-width: 48px; }
+  .comm-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--sky-white);
+  }
+  .comm-desc { font-size: 13px; color: rgba(232,244,255,0.6); line-height: 1.75; }
+  .comm-link-text {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--sky-cyan);
+    letter-spacing: 1px;
+  }
+  @media (max-width: 1024px) {
+    .yt-grid { grid-template-columns: 1fr 1fr; }
+    .community-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) { .yt-grid { grid-template-columns: 1fr; } }
+
+  /* ===== VISUAL COMPARE SECTION ===== */
+  .compare-visual-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 36px;
+    align-items: start;
+  }
+  .cvg-card {
+    background: #fff;
+    border: 1.5px solid rgba(21,101,192,0.14);
+    border-radius: 20px;
+    padding: 28px 22px 22px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 16px rgba(21,101,192,0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  .cvg-card:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(21,101,192,0.13); }
+  .cvg-card.cvg-featured { border-color: rgba(46,125,50,0.28); box-shadow: 0 4px 24px rgba(46,125,50,0.10); }
+  .cvg-card.cvg-wing { border-color: rgba(229,92,0,0.20); }
+  .cvg-featured-label {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: #2e7d32; color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 4px 16px; border-radius: 99px; white-space: nowrap;
+  }
+  .cvg-emoji { font-size: 44px; text-align: center; margin-bottom: 6px; }
+  .cvg-name { font-size: 20px; font-weight: 800; color: #1a2d42; text-align: center; margin-bottom: 4px; }
+  .cvg-tagline { font-size: 12.5px; color: #4a6785; text-align: center; margin-bottom: 22px; line-height: 1.6; }
+  /* Meter bars */
+  .cvg-meters { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+  .cvg-m-row { display: grid; grid-template-columns: 66px 1fr 60px; align-items: center; gap: 8px; }
+  .cvg-m-label { font-size: 11px; color: #4a6785; font-weight: 600; }
+  .cvg-m-track { height: 7px; background: rgba(21,101,192,0.09); border-radius: 99px; overflow: hidden; }
+  .cvg-m-fill { height: 100%; border-radius: 99px; background: #1565c0; }
+  .cvg-m-fill.g { background: #2e7d32; }
+  .cvg-m-fill.o { background: #e55c00; }
+  .cvg-m-val { font-size: 11px; font-weight: 700; color: #1a2d42; text-align: right; }
+  .cvg-sep { height: 1px; background: rgba(21,101,192,0.08); margin: 14px 0; }
+  /* Status pill */
+  .cvg-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 12px; border-radius: 99px; margin-bottom: 12px; align-self: flex-start;
+  }
+  .cvg-status.ok  { background: rgba(46,125,50,0.09);  color: #2e7d32; border: 1px solid rgba(46,125,50,0.22); }
+  .cvg-status.warn{ background: rgba(229,92,0,0.09);   color: #e55c00; border: 1px solid rgba(229,92,0,0.22); }
+  /* Fact pills */
+  .cvg-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .cvg-fact { font-size: 11px; color: #4a6785; background: #f4f8fe; border: 1px solid rgba(21,101,192,0.12); padding: 4px 10px; border-radius: 99px; }
+  /* For box */
+  .cvg-for { padding: 12px 14px; background: rgba(21,101,192,0.05); border-radius: 10px; border: 1px solid rgba(21,101,192,0.12); margin-top: auto; }
+  .cvg-card.cvg-featured .cvg-for { background: rgba(46,125,50,0.05); border-color: rgba(46,125,50,0.15); }
+  .cvg-card.cvg-wing    .cvg-for { background: rgba(229,92,0,0.05);  border-color: rgba(229,92,0,0.15); }
+  .cvg-for-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #1565c0; margin-bottom: 4px; }
+  .cvg-card.cvg-featured .cvg-for-label { color: #2e7d32; }
+  .cvg-card.cvg-wing    .cvg-for-label { color: #e55c00; }
+  .cvg-for-text { font-size: 12.5px; color: rgba(26,45,66,0.75); line-height: 1.65; }
+  /* Journey flow */
+  .cvg-journey {
+    background: #fff; border: 1.5px solid rgba(21,101,192,0.14);
+    border-radius: 16px; padding: 26px 28px; margin-bottom: 36px;
+    box-shadow: 0 2px 16px rgba(21,101,192,0.06);
+  }
+  .cvg-journey-title { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #1565c0; text-align: center; margin-bottom: 18px; }
+  .cvg-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+  .cvg-step {
+    text-align: center; padding: 11px 14px;
+    background: rgba(21,101,192,0.06); border-radius: 12px;
+    border: 1px solid rgba(21,101,192,0.14); min-width: 100px;
+  }
+  .cvg-step.s-para { background: rgba(46,125,50,0.05); border-color: rgba(46,125,50,0.18); }
+  .cvg-step.s-wing { background: rgba(229,92,0,0.05);  border-color: rgba(229,92,0,0.18); }
+  .cvg-step-n {
+    width: 22px; height: 22px; background: #1565c0; color: #fff;
+    border-radius: 50%; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 6px;
+  }
+  .cvg-step.s-para .cvg-step-n { background: #2e7d32; }
+  .cvg-step.s-wing .cvg-step-n { background: #e55c00; }
+  .cvg-step strong { font-size: 12px; color: #1a2d42; display: block; margin-bottom: 2px; }
+  .cvg-step span    { font-size: 11px; color: #4a6785; }
+  .cvg-arr { font-size: 18px; color: #b0c8e0; flex-shrink: 0; }
+  .cvg-or-label { font-size: 10px; color: #90b4d8; padding: 3px 8px; background: #f4f8fe; border-radius: 4px; border: 1px solid rgba(21,101,192,0.10); flex-shrink: 0; }
+  @media (max-width: 900px) { .compare-visual-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto 36px; } }
+  @media (max-width: 640px) { .cvg-journey { padding: 18px 14px; } .cvg-step { min-width: 80px; padding: 9px 10px; } .cvg-arr { font-size: 14px; } }
+
+  /* ======================================================
+     LIGHT THEME OVERRIDES
+     다크 테마의 하드코딩된 rgba 값들을 라이트 테마로 교체
+  ====================================================== */
+
+  /* 커스텀 커서 제거 (비전문적) */
+  body { cursor: auto; }
+  .cursor, .cursor-trail { display: none; }
+
+  /* 스크롤바 */
+  ::-webkit-scrollbar-track { background: #e8f0fb; }
+  ::-webkit-scrollbar-thumb { background: #90b4d8; }
+
+  /* 네비게이션 */
+  nav {
+    background: rgba(255,255,255,0.97) !important;
+    border-bottom: 1px solid rgba(21,101,192,0.12);
+    box-shadow: 0 2px 20px rgba(21,101,192,0.08);
+  }
+  .nav-logo { color: #1565c0; }
+  .nav-logo span { color: #e55c00; }
+  .nav-links a { color: #4a6785; }
+  .nav-links a:hover { color: #1565c0; }
+  .nav-toggle { color: #1565c0 !important; }
+
+  /* 히어로 섹션 */
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 30%, rgba(21,101,192,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(2,119,189,0.06) 0%, transparent 60%),
+      linear-gradient(160deg, #f4f8fe 0%, #e0edf9 50%, #d2e5f7 100%);
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(21,101,192,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(21,101,192,0.05) 1px, transparent 1px);
+  }
+  .hero-altitude { color: #1976d2; }
+  .hero-title { color: #1a2d42; }
+  .hero-title .line2 { color: #0277bd; }
+  .hero-title .line3 { color: #e55c00; }
+  .hero-desc { color: rgba(26,45,66,0.72); }
+  .stat-num { color: #1565c0; }
+  .stat-label { color: #4a6785; }
+  .hero-scroll { color: #7a9bb5; }
+  .scroll-line { background: linear-gradient(90deg, transparent, #1565c0); }
+  .btn-primary { background: #1565c0; color: #ffffff; }
+  .btn-primary:hover { background: #0d47a1; transform: translateY(-2px); }
+  .btn-secondary { border-color: rgba(21,101,192,0.4); color: #1565c0; }
+  .btn-secondary:hover { background: rgba(21,101,192,0.08); }
+
+  /* 섹션 헤더 */
+  .section-tag { color: #1976d2; }
+  .section-tag::before { background: #1976d2; }
+  .section-title em { color: #0277bd; }
+  .section-subtitle { color: #4a6785; }
+
+  /* 구분선 */
+  .divider { background: linear-gradient(90deg, transparent, rgba(21,101,192,0.15), transparent); }
+
+  /* 공통 카드 — 흰 배경 + 부드러운 그림자 */
+  .compare-card,
+  .knowledge-card,
+  .path-content,
+  .country-card,
+  .fitness-card,
+  .wtype-card,
+  .para-step-content,
+  .para-site-card,
+  .para-equip-card,
+  .faq-item,
+  .equipment-card,
+  .safety-card,
+  .inst-card,
+  .yt-card,
+  .comm-card {
+    background: #ffffff;
+    border-color: rgba(21,101,192,0.12);
+    box-shadow: 0 2px 16px rgba(21,101,192,0.06);
+  }
+  .compare-card:hover,
+  .knowledge-card:hover,
+  .country-card:hover,
+  .fitness-card:hover,
+  .wtype-card:hover,
+  .para-site-card:hover,
+  .para-equip-card:hover,
+  .faq-item:hover,
+  .equipment-card:hover,
+  .inst-card:hover {
+    background: #f8fbff;
+    border-color: rgba(21,101,192,0.28);
+    box-shadow: 0 8px 32px rgba(21,101,192,0.12);
+  }
+
+  /* 카드 본문 텍스트 (하드코딩된 rgba(232,244,255,...) 전부 교체) */
+  .hero-desc,
+  .compare-note p,
+  .card-body,
+  .compare-for,
+  .path-content p,
+  .wingsuit-info p,
+  .req-text p,
+  .wtype-body,
+  .para-step-content p,
+  .para-site-body,
+  .para-equip-card .equip-body,
+  .faq-a,
+  .equip-body,
+  .safety-body,
+  .bmi-info-text p,
+  .inst-body,
+  .yt-desc,
+  .comm-desc,
+  .fitness-body {
+    color: rgba(26,45,66,0.7);
+  }
+
+  /* 카드 제목 */
+  .card-title,
+  .compare-name,
+  .country-name,
+  .fitness-title,
+  .path-content h3,
+  .wingsuit-info h2,
+  .wtype-name,
+  .para-step-content h3,
+  .para-site-name,
+  .equip-name,
+  .inst-name,
+  .yt-channel,
+  .comm-name,
+  .faq-q {
+    color: #1a2d42;
+  }
+
+  /* 배지·하이라이트 */
+  .card-highlight {
+    background: rgba(21,101,192,0.08);
+    border-color: rgba(21,101,192,0.25);
+    color: #1976d2;
+  }
+  .card-num { color: rgba(21,101,192,0.10); }
+
+  /* 태그 */
+  .tag { border-color: rgba(229,92,0,0.35); color: #e55c00; }
+  .tag.blue { border-color: rgba(21,101,192,0.30); color: #1565c0; }
+  .tag.gold { border-color: rgba(217,119,6,0.30); color: #d97706; }
+
+  /* 비교 섹션 */
+  .compare-rows { border-top-color: rgba(21,101,192,0.10); }
+  .compare-row { border-bottom-color: rgba(21,101,192,0.06); }
+  .cr-label { color: #4a6785; }
+  .cr-val { color: #1a2d42; }
+  .cr-good { color: #2e7d32; }
+  .cr-mid { color: #d97706; }
+  .cr-danger { color: #c62828; }
+  .compare-for {
+    background: rgba(21,101,192,0.04);
+    border-color: rgba(21,101,192,0.10);
+    color: #4a6785;
+  }
+  .compare-for strong { color: #1a2d42; }
+  .compare-note {
+    background: rgba(21,101,192,0.05);
+    border-color: rgba(21,101,192,0.18);
+  }
+  .compare-note strong { color: #1565c0; }
+  .compare-card-featured {
+    border-color: rgba(46,125,50,0.25) !important;
+    background: rgba(46,125,50,0.03) !important;
+  }
+  .compare-card-featured:hover { background: rgba(46,125,50,0.07) !important; }
+  .compare-featured-label { background: #2e7d32; color: #fff; }
+
+  /* 학습 경로 */
+  .path-timeline::before { background: linear-gradient(180deg, #1565c0, #90b4d8, transparent); }
+  .path-dot { background: #fff; border-color: #1565c0; }
+  .path-dot.active { background: #1565c0; box-shadow: 0 0 16px rgba(21,101,192,0.35); }
+  .path-step { color: #1976d2; }
+  .path-content::after { color: rgba(21,101,192,0.05); }
+
+  /* 국가 카드 */
+  .country-sub { color: #1976d2; }
+  .country-cost { color: #e55c00; }
+  .country-cost span { color: #4a6785; }
+  .country-best {
+    background: rgba(229,92,0,0.08);
+    border-color: rgba(229,92,0,0.22);
+    color: #e55c00;
+  }
+  .country-card.featured {
+    border-color: rgba(21,101,192,0.25) !important;
+    background: rgba(21,101,192,0.04) !important;
+  }
+  .country-card.featured::before { background: #1565c0; color: #fff; }
+  .pros h4 { color: #2e7d32; }
+  .cons h4 { color: #c62828; }
+  .pros ul, .cons ul { color: rgba(26,45,66,0.72); }
+  .pros li::before { color: #2e7d32; }
+  .cons li::before { color: #c62828; }
+
+  /* 체력 */
+  .fitness-exercises { color: #1976d2; border-top-color: rgba(21,101,192,0.12); }
+  .bmi-info {
+    background: rgba(229,92,0,0.05);
+    border-color: rgba(229,92,0,0.18);
+  }
+  .bmi-info-text h3 { color: #e55c00; }
+
+  /* 윙슈트 */
+  .wingsuit-section {
+    background: linear-gradient(180deg, #f4f8fe 0%, rgba(21,101,192,0.06) 50%, #f4f8fe 100%);
+  }
+  .wingsuit-section::before { color: rgba(21,101,192,0.04); }
+  .wingsuit-info h2 { color: #e55c00; }
+  .req-item { border-bottom-color: rgba(21,101,192,0.10); }
+  .req-num { color: #1565c0; }
+  .req-text h4 { color: #1a2d42; }
+  .wtype-header { border: none; }
+  .level-beginner { color: #2e7d32; border-color: rgba(46,125,50,0.30); }
+  .level-intermediate { color: #d97706; border-color: rgba(217,119,6,0.30); }
+  .level-advanced { color: #e55c00; border-color: rgba(229,92,0,0.30); }
+
+  /* 패러글라이딩 */
+  .para-section { background: #e8f0fb; }
+  .para-step-num {
+    color: #1976d2;
+    background: rgba(21,101,192,0.08);
+    border-color: rgba(21,101,192,0.20);
+  }
+  .para-site-top {
+    border-color: rgba(217,119,6,0.25) !important;
+    background: rgba(217,119,6,0.04) !important;
+  }
+  .para-site-badge { background: #d97706; color: #fff; }
+  .para-site-sub { color: #1976d2; }
+  .equip-kr { color: #4a6785; }
+  .equip-price { color: #e55c00; }
+
+  /* FAQ */
+  .faq-tag { color: #7a9bb5; }
+  .faq-q::after { color: #1565c0; }
+
+  /* 장비 */
+  .equipment-badge.badge-essential {
+    background: rgba(229,92,0,0.10);
+    color: #e55c00;
+  }
+  .equipment-badge.badge-recommended {
+    background: rgba(21,101,192,0.10);
+    color: #1565c0;
+  }
+
+  /* 안전 */
+  .safety-card {
+    background: rgba(229,92,0,0.04) !important;
+    border-color: rgba(229,92,0,0.15) !important;
+    box-shadow: 0 2px 16px rgba(229,92,0,0.05) !important;
+  }
+  .safety-title { color: #e55c00; }
+  .safety-body { color: rgba(26,45,66,0.72); }
+  .safety-body ul { color: rgba(26,45,66,0.70); }
+
+  /* 기관 */
+  .inst-location { color: #1976d2; }
+  .badge-sky { background: rgba(21,101,192,0.08); color: #1565c0; border-color: rgba(21,101,192,0.22); }
+  .badge-para { background: rgba(46,125,50,0.08); color: #2e7d32; border-color: rgba(46,125,50,0.22); }
+  .inst-link { background: rgba(21,101,192,0.08); border-color: rgba(21,101,192,0.25); color: #1565c0; }
+  .inst-link:hover { background: rgba(21,101,192,0.16); }
+  .inst-link.green { background: rgba(46,125,50,0.08); border-color: rgba(46,125,50,0.25); color: #2e7d32; }
+  .inst-link.green:hover { background: rgba(46,125,50,0.16); }
+  .inst-card.featured-sky { border-color: rgba(21,101,192,0.25) !important; background: rgba(21,101,192,0.03) !important; }
+  .inst-card.featured-para { border-color: rgba(46,125,50,0.25) !important; background: rgba(46,125,50,0.03) !important; }
+
+  /* 유튜브 카드 */
+  .yt-card::before { background: #1565c0; }
+  .yt-card:hover { border-color: rgba(21,101,192,0.32); background: #f8fbff; box-shadow: 0 8px 32px rgba(21,101,192,0.12); }
+  .yt-handle { color: #c62828; }
+  .yt-tag-sky { color: #1565c0; border-color: rgba(21,101,192,0.30); }
+  .yt-tag-para { color: #2e7d32; border-color: rgba(46,125,50,0.30); }
+  .yt-tag-wing { color: #e55c00; border-color: rgba(229,92,0,0.30); }
+  .yt-tag-kr { color: #d97706; border-color: rgba(217,119,6,0.30); }
+  .yt-tag-edu { color: #4a6785; border-color: rgba(74,103,133,0.30); }
+
+  /* 커뮤니티 */
+  .comm-card:hover { border-color: rgba(21,101,192,0.28); background: #f8fbff; }
+  .comm-link-text { color: #1565c0; }
+
+  /* 비교 노트 (기관·미디어 섹션 포함) */
+  .compare-note span { color: #1976d2 !important; }
+
+  /* 푸터 — 다크는 유지 (신뢰감·대비) */
+  footer {
+    background: #1a2d42;
+    border-top: none;
+  }
+  .footer-logo { color: #60a5fa; }
+  .footer-logo span { color: #fb923c; }
+  .footer-tagline { color: rgba(255,255,255,0.5); }
+  .footer-links a { color: rgba(255,255,255,0.5); }
+  .footer-links a:hover { color: #60a5fa; }
+  .footer-disclaimer { color: rgba(255,255,255,0.35); }
 </style>
 </head>
 <body>
@@ -1064,7 +1635,9 @@
     <li><a href="#paragliding">패러글라이딩</a></li>
     <li><a href="#wingsuit">윙슈트</a></li>
     <li><a href="#countries">국가별비교</a></li>
+    <li><a href="#institutions">국내기관</a></li>
     <li><a href="#equipment">장비</a></li>
+    <li><a href="#media">채널&커뮤니티</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#safety">안전</a></li>
   </ul>
@@ -1118,66 +1691,172 @@
   <h2 class="section-title">나에게 맞는<br><em>하늘은?</em></h2>
   <p class="section-subtitle">스카이다이빙, 패러글라이딩, 윙슈트는 모두 하늘을 나는 스포츠지만 성격이 전혀 다릅니다. 먼저 비교하고 방향을 정하세요.</p>
 
-  <div class="compare-cards animate-in">
-    <div class="compare-card">
-      <div class="compare-icon">🪂</div>
-      <div class="compare-name">스카이다이빙</div>
-      <div class="compare-tag-badge" style="background:rgba(0,212,255,0.1);color:var(--sky-cyan);border:1px solid rgba(0,212,255,0.3);">SKYDIVING</div>
-      <div class="compare-rows">
-        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">약 6~7분</span></div>
-        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">자유낙하 200km/h</span></div>
-        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val">없음 (탠덤 즉시 가능)</span></div>
-        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">200~350만원</span></div>
-        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">800만원~ (중고 500~)</span></div>
-        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-mid">보통 (해외 교육 권장)</span></div>
-        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★★☆</span></div>
-        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-mid">중간</span></div>
-        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">강렬 · 짧은 자유감</span></div>
+  <!-- 비주얼 비교 카드 3개 -->
+  <div class="compare-visual-grid animate-in">
+
+    <!-- 스카이다이빙 -->
+    <div class="cvg-card">
+      <div class="cvg-emoji">🪂</div>
+      <div class="cvg-name">스카이다이빙</div>
+      <div class="cvg-tagline">비행기에서 뛰어내리는<br>강렬한 자유낙하 경험</div>
+      <div class="cvg-meters">
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">스릴 강도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:80%"></div></div>
+          <span class="cvg-m-val">높음</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비행 시간</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:15%"></div></div>
+          <span class="cvg-m-val">약 6분</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">입문 난이도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:25%"></div></div>
+          <span class="cvg-m-val">쉬움</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비용 수준</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill" style="width:65%"></div></div>
+          <span class="cvg-m-val">높은 편</span>
+        </div>
       </div>
-      <div class="compare-for">이런 분께 추천<br><strong>강렬한 한 방의 자유를 원하는 분</strong></div>
+      <div class="cvg-sep"></div>
+      <span class="cvg-status ok">✅ 오늘 바로 체험 가능 (탠덤)</span>
+      <div class="cvg-facts">
+        <span class="cvg-fact">⏱️ 자유낙하 약 60초</span>
+        <span class="cvg-fact">💨 낙하 속도 200km/h</span>
+        <span class="cvg-fact">💰 탠덤 77만원~</span>
+        <span class="cvg-fact">📍 충주 DZ</span>
+      </div>
+      <div class="cvg-for">
+        <div class="cvg-for-label">이런 분께 맞아요</div>
+        <div class="cvg-for-text">짧고 강렬하게, 평생 잊지 못할 단 한 번의 경험을 원하는 분</div>
+      </div>
     </div>
 
-    <div class="compare-card compare-card-featured">
-      <div class="compare-featured-label">입문 추천</div>
-      <div class="compare-icon">🪁</div>
-      <div class="compare-name">패러글라이딩</div>
-      <div class="compare-tag-badge" style="background:rgba(76,255,145,0.1);color:#4cff91;border:1px solid rgba(76,255,145,0.3);">PARAGLIDING</div>
-      <div class="compare-rows">
-        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">20분~수 시간</span></div>
-        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">30~55km/h</span></div>
-        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val">없음 (교육 등록)</span></div>
-        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">80~150만원</span></div>
-        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">500~800만원 (중고 150~)</span></div>
-        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-good">매우 좋음 (전국 스쿨)</span></div>
-        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★☆☆</span></div>
-        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-mid">중간</span></div>
-        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">평화 · 긴 비행 · 풍경</span></div>
+    <!-- 패러글라이딩 -->
+    <div class="cvg-card cvg-featured">
+      <div class="cvg-featured-label">입문 추천</div>
+      <div class="cvg-emoji">🪁</div>
+      <div class="cvg-name">패러글라이딩</div>
+      <div class="cvg-tagline">산에서 활공하며 하늘을<br>오랫동안 자유롭게 나는 비행</div>
+      <div class="cvg-meters">
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">스릴 강도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:45%"></div></div>
+          <span class="cvg-m-val">적당</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비행 시간</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:100%"></div></div>
+          <span class="cvg-m-val">1시간~</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">입문 난이도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:18%"></div></div>
+          <span class="cvg-m-val">가장 쉬움</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비용 수준</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill g" style="width:42%"></div></div>
+          <span class="cvg-m-val">보통</span>
+        </div>
       </div>
-      <div class="compare-for">이런 분께 추천<br><strong>오래, 자유롭게 하늘을 날고 싶은 분</strong></div>
+      <div class="cvg-sep"></div>
+      <span class="cvg-status ok">✅ 교육 등록 즉시 시작</span>
+      <div class="cvg-facts">
+        <span class="cvg-fact">🏔️ 전국 100곳+ 스쿨</span>
+        <span class="cvg-fact">💰 체험 5~10만원~</span>
+        <span class="cvg-fact">🪁 자격증 80~150만원</span>
+        <span class="cvg-fact">🌤️ 조건 좋으면 수시간 비행</span>
+      </div>
+      <div class="cvg-for">
+        <div class="cvg-for-label">이런 분께 맞아요</div>
+        <div class="cvg-for-text">풍경을 감상하며 오래, 여유롭게 하늘을 날고 싶은 분</div>
+      </div>
     </div>
 
-    <div class="compare-card">
-      <div class="compare-icon">🦅</div>
-      <div class="compare-name">윙슈트</div>
-      <div class="compare-tag-badge" style="background:rgba(255,107,53,0.1);color:var(--accent-orange);border:1px solid rgba(255,107,53,0.3);">WINGSUIT</div>
-      <div class="compare-rows">
-        <div class="compare-row"><span class="cr-label">비행 시간</span><span class="cr-val">약 2~3분</span></div>
-        <div class="compare-row"><span class="cr-label">속도</span><span class="cr-val">수평 150~250km/h</span></div>
-        <div class="compare-row"><span class="cr-label">입문 전제</span><span class="cr-val cr-danger">스카이다이빙 200회+</span></div>
-        <div class="compare-row"><span class="cr-label">자격증 비용</span><span class="cr-val">FFC 과정 별도</span></div>
-        <div class="compare-row"><span class="cr-label">장비 비용</span><span class="cr-val">스카이다이빙 + 50~100만원</span></div>
-        <div class="compare-row"><span class="cr-label">국내 접근성</span><span class="cr-val cr-danger">매우 어려움</span></div>
-        <div class="compare-row"><span class="cr-label">스릴 강도</span><span class="cr-val">★★★★★</span></div>
-        <div class="compare-row"><span class="cr-label">위험도</span><span class="cr-val cr-danger">높음</span></div>
-        <div class="compare-row"><span class="cr-label">경험 성격</span><span class="cr-val">새처럼 날기 · 극한 비행</span></div>
+    <!-- 윙슈트 -->
+    <div class="cvg-card cvg-wing">
+      <div class="cvg-emoji">🦅</div>
+      <div class="cvg-name">윙슈트</div>
+      <div class="cvg-tagline">새처럼 수평 비행하는<br>극한의 스카이스포츠</div>
+      <div class="cvg-meters">
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">스릴 강도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:100%"></div></div>
+          <span class="cvg-m-val">최고</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비행 시간</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:18%"></div></div>
+          <span class="cvg-m-val">약 2~3분</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">입문 난이도</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:100%"></div></div>
+          <span class="cvg-m-val">매우 어려움</span>
+        </div>
+        <div class="cvg-m-row">
+          <span class="cvg-m-label">비용 수준</span>
+          <div class="cvg-m-track"><div class="cvg-m-fill o" style="width:88%"></div></div>
+          <span class="cvg-m-val">매우 높음</span>
+        </div>
       </div>
-      <div class="compare-for">이런 분께 추천<br><strong>스카이다이빙 경험 후 극한에 도전하려는 분</strong></div>
+      <div class="cvg-sep"></div>
+      <span class="cvg-status warn">⚠️ 스카이다이빙 200회+ 필수</span>
+      <div class="cvg-facts">
+        <span class="cvg-fact">💨 수평 속도 200km/h</span>
+        <span class="cvg-fact">🔥 위험도 가장 높음</span>
+        <span class="cvg-fact">🎓 FFC 교육 과정 필요</span>
+      </div>
+      <div class="cvg-for">
+        <div class="cvg-for-label">이런 분께 맞아요</div>
+        <div class="cvg-for-text">스카이다이빙 경력을 쌓은 뒤 진정한 새처럼 나는 꿈에 도전하려는 분</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 추천 시작 여정 -->
+  <div class="cvg-journey animate-in">
+    <div class="cvg-journey-title">✈️ 처음이라면? — 추천 입문 순서</div>
+    <div class="cvg-flow">
+      <div class="cvg-step">
+        <div class="cvg-step-n">1</div>
+        <strong>풍동 체험</strong>
+        <span>실내에서 감각 먼저</span>
+      </div>
+      <div class="cvg-arr">→</div>
+      <div class="cvg-step">
+        <div class="cvg-step-n">2</div>
+        <strong>탠덤 점프</strong>
+        <span>강사와 첫 실외 점프</span>
+      </div>
+      <div class="cvg-or-label">또는</div>
+      <div class="cvg-step s-para">
+        <div class="cvg-step-n">2</div>
+        <strong>패러글라이딩</strong>
+        <span>교관과 첫 활공 비행</span>
+      </div>
+      <div class="cvg-arr">→</div>
+      <div class="cvg-step">
+        <div class="cvg-step-n">3</div>
+        <strong>자격증 취득</strong>
+        <span>AFF or 패러 P1~P4</span>
+      </div>
+      <div class="cvg-arr">→</div>
+      <div class="cvg-step s-wing">
+        <div class="cvg-step-n">4</div>
+        <strong>윙슈트 도전</strong>
+        <span>스카이다이빙 200회+</span>
+      </div>
     </div>
   </div>
 
   <div class="compare-note animate-in">
-    <span style="color:var(--sky-cyan);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">// TIP</span>
-    <p>처음이라면 <strong>패러글라이딩</strong>이 국내 접근성·비용 면에서 가장 유리합니다. 강렬한 한 방을 원한다면 <strong>탠덤 스카이다이빙</strong>으로 먼저 체험해 보세요. 윙슈트는 충분한 경험 후의 목표로 삼으세요.</p>
+    <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--sky-blue);">// 요약 TIP</span>
+    <p>처음이라면 <strong>패러글라이딩</strong>이 국내 접근성·비용 면에서 가장 유리합니다. 강렬한 한 방을 원한다면 <strong>탠덤 스카이다이빙</strong>으로 먼저 체험해 보세요. 윙슈트는 스카이다이빙을 충분히 경험한 뒤 목표로 삼으세요.</p>
   </div>
 </section>
 
@@ -1533,6 +2212,193 @@
 
 <div class="divider"></div>
 
+<!-- INSTITUTIONS -->
+<section class="institutions-section" id="institutions">
+  <div class="section-tag">국내 체험·교육 기관</div>
+  <h2 class="section-title">지금 바로<br><em>시작하는 곳</em></h2>
+  <p class="section-subtitle">정보만으로는 충분하지 않습니다. 실제로 체험하고 교육받을 수 있는 국내 기관을 직접 연결합니다. 방문 전 전화·카페로 최신 일정을 꼭 확인하세요.</p>
+
+  <!-- 실외 스카이다이빙 -->
+  <div class="section-tag" style="margin-top:60px;">🪂 실외 스카이다이빙 (실제 점프)</div>
+  <p style="font-size:14px;color:var(--text-muted);margin:16px 0 32px;line-height:1.8;">국내에서 실제 항공기에 탑승해 점프를 체험하거나 자격증 교육을 받을 수 있는 곳은 현재 <strong style="color:var(--sky-blue);">스카이다이브 코리아(충주) 단 한 곳</strong>입니다. 실외 스카이다이빙은 날씨·바람 조건에 따라 당일 취소될 수 있으므로, 예약 전 반드시 운영 여부를 확인하세요.</p>
+  <div class="inst-grid animate-in" style="max-width:640px;">
+    <div class="inst-card featured-sky" style="grid-column: 1 / -1;">
+      <span class="inst-type-badge badge-sky">USPA 국제 공인 · 국내 유일 실외 DZ</span>
+      <div class="inst-name">스카이다이브 코리아 (Skydive Korea)</div>
+      <div class="inst-location">📍 충청북도 충주시 앙성면 &nbsp;|&nbsp; ☎ 1588-8715 &nbsp;|&nbsp; 평점 ⭐ 4.7</div>
+      <p class="inst-body">국내 유일 USPA(미국낙하산협회) 국제 공인 스카이다이빙 Drop Zone. 군 출신 전문 강사진 운영, 전용 항공기 보유, 체험 무사고 업체. 탠덤 점프·AFF 자격증 과정·펀점프·방송 촬영까지 가능.</p>
+
+      <!-- 가격 정보 -->
+      <div style="margin:16px 0;padding:16px;background:rgba(21,101,192,0.06);border:1px solid rgba(21,101,192,0.16);border-radius:10px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--sky-blue);margin-bottom:10px;">💰 요금 안내 (탠덤 점프 · 고도 3,800m)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <div style="flex:1;min-width:160px;padding:10px 14px;background:#fff;border:1px solid rgba(21,101,192,0.15);border-radius:8px;">
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">골드 패키지 (핸디캠)</div>
+            <div style="font-size:20px;font-weight:800;color:var(--sky-blue);">약 770,000원</div>
+          </div>
+          <div style="flex:1;min-width:160px;padding:10px 14px;background:#fff;border:1px solid rgba(21,101,192,0.15);border-radius:8px;">
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">다이아 패키지 (아웃캠)</div>
+            <div style="font-size:20px;font-weight:800;color:var(--sky-blue);">약 880,000원</div>
+          </div>
+          <div style="flex:1;min-width:160px;padding:10px 14px;background:#fff;border:1px solid rgba(217,119,6,0.20);border-radius:8px;">
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">AFF 자격증 과정 (약 3일)</div>
+            <div style="font-size:20px;font-weight:800;color:var(--accent-yellow);">약 450만원</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-muted);line-height:1.7;">
+          ※ 탠덤 점프 시 <strong>점프수트·헬멧·고글·낙하산 장비 일체가 가격에 포함</strong>됩니다. 별도 장비 렌탈 비용 없음.<br>
+          ※ AFF 자격증 교육 과정에서도 교육용 장비를 센터에서 대여해줍니다.
+        </div>
+      </div>
+
+      <!-- 운영 정보 -->
+      <div style="margin:12px 0;padding:12px 14px;background:rgba(229,92,0,0.05);border:1px solid rgba(229,92,0,0.15);border-radius:8px;font-size:13px;color:var(--text-muted);line-height:1.75;">
+        🕘 <strong style="color:var(--accent-orange);">운영: 주말(토·일) 오전 9시 ~ 오후 5시만 운영</strong> (기상 조건에 따라 당일 취소 가능 — 방문 전 전화 필수)
+      </div>
+
+      <div class="inst-offers">
+        <span class="tag blue">탠덤 체험</span>
+        <span class="tag blue">AFF 자격증</span>
+        <span class="tag">펀 점프</span>
+        <span class="tag gold">USPA 국제 공인</span>
+        <span class="tag">장비 일체 제공</span>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+        <a href="https://www.skydivekorea.com" class="inst-link" target="_blank" rel="noopener">공식 홈페이지 →</a>
+        <a href="https://pf.kakao.com/_TxesXu" class="inst-link" target="_blank" rel="noopener">카카오 채널 →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 실내 스카이다이빙 -->
+  <div class="section-tag" style="margin-top:64px;">🌀 실내 스카이다이빙 (풍동 체험)</div>
+
+  <!-- 겁나는 분들을 위한 추천 안내 -->
+  <div style="margin:20px 0 28px;padding:18px 22px;background:linear-gradient(135deg,rgba(21,101,192,0.07),rgba(2,119,189,0.04));border:1.5px solid rgba(21,101,192,0.20);border-left:4px solid #1565c0;border-radius:12px;display:flex;gap:16px;align-items:flex-start;">
+    <span style="font-size:28px;line-height:1;flex-shrink:0;">💡</span>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#1565c0;letter-spacing:0.5px;margin-bottom:6px;">실외 점프가 무섭거나 부담스럽다면?</div>
+      <p style="font-size:13px;color:rgba(26,45,66,0.75);line-height:1.8;margin:0;">실외 스카이다이빙에 관심은 있지만 수십 미터 상공에서 뛰어내리는 게 두렵다면, <strong>풍동 체험을 먼저 해보는 것</strong>을 추천합니다. 실내에서 강력한 바람으로 자유낙하 감각을 안전하게 경험할 수 있어 <strong>공포감을 자연스럽게 줄이는 데 도움</strong>이 됩니다. 실제로 많은 입문자가 풍동 → 탠덤 점프 순서로 시작합니다.</p>
+    </div>
+  </div>
+
+  <p style="font-size:14px;color:var(--text-muted);margin:0 0 32px;line-height:1.8;">날씨와 무관하게 바람을 이용해 스카이다이빙 자유낙하 감각을 체험할 수 있는 풍동(Wind Tunnel) 시설입니다. 실제 점프 전 기초 자세·바디포지션 연습에도 효과적입니다.</p>
+  <div class="inst-grid animate-in" style="max-width:640px;">
+    <div class="inst-card featured-sky" style="grid-column: 1 / -1;">
+      <span class="inst-type-badge badge-sky">INDOOR SKYDIVING · 국내 유일 풍동 시설</span>
+      <div class="inst-name">플라이스테이션 코리아 (Fly Station Korea)</div>
+      <div class="inst-location">📍 경기도 용인시 포곡읍 &nbsp;|&nbsp; 평점 ⭐ 4.5</div>
+      <p class="inst-body">바람을 이용한 실내 풍동 시설로, 날씨에 관계없이 언제든 스카이다이빙 자유낙하 감각을 체험할 수 있습니다. 국내에서 가장 많은 리뷰를 보유한 풍동 체험 명소이며, 외국인 영어 강사도 상주해 접근성이 높습니다. 실제 점프 전 바디포지션 감각 훈련에도 활용됩니다.</p>
+      <div class="inst-offers">
+        <span class="tag blue">풍동 체험</span>
+        <span class="tag blue">자세 교육</span>
+        <span class="tag gold">날씨 무관</span>
+        <span class="tag">영어 강사 상주</span>
+      </div>
+      <div style="margin-top:16px;">
+        <a href="https://www.flystation.kr" class="inst-link" target="_blank" rel="noopener">공식 홈페이지 →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-note animate-in" style="margin-top:40px;">
+    <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--sky-blue);">// 참고 사항</span>
+    <p>국내 실외 스카이다이빙 장소는 매우 제한적입니다. 더 다양한 경험·AFF 자격증 취득을 원한다면 <strong>괌, 뉴질랜드, 태국</strong> 등 해외 원정도 좋은 선택입니다. 아래 해외 DZ 섹션을 참고하세요.</p>
+  </div>
+
+  <!-- 패러글라이딩 스쿨 -->
+  <div class="section-tag" style="margin-top:72px;">🪁 패러글라이딩 — 국내 교육 스쿨</div>
+  <p style="font-size:14px;color:var(--text-muted);margin:16px 0 32px;line-height:1.8;">전국 100개 이상의 이륙장·스쿨이 있으며, 대한패러글라이딩협회(KPA) 인가 스쿨에서 정규 자격과정을 이수할 것을 권장합니다.</p>
+  <div class="inst-grid animate-in">
+    <div class="inst-card featured-para">
+      <span class="inst-type-badge badge-para">PARAGLIDING SCHOOL</span>
+      <div class="inst-name">단양 — 패러글라이딩 성지</div>
+      <div class="inst-location">📍 충북 단양군 두악산·양방산 활공장</div>
+      <p class="inst-body">국내 패러글라이딩 최대 집적지. 두악산(해발 1,000m+)·양방산 활공장에 복수의 스쿨 운영. 연 300일+ 비행 가능. KPA P1~P4 정규 교육과정. 숙박 연계 교육 패키지도 제공.</p>
+      <div class="inst-offers">
+        <span class="tag">P1~P4 정규과정</span>
+        <span class="tag blue">체험 비행</span>
+        <span class="tag gold">연 300일+ 비행</span>
+        <span class="tag">숙박 패키지</span>
+      </div>
+      <a href="https://search.naver.com/search.naver?query=단양+패러글라이딩+스쿨+교육" class="inst-link green" target="_blank" rel="noopener">단양 스쿨 찾기 →</a>
+    </div>
+    <div class="inst-card">
+      <span class="inst-type-badge badge-para">PARAGLIDING SCHOOL</span>
+      <div class="inst-name">유명산 패러글라이딩 스쿨</div>
+      <div class="inst-location">📍 경기도 양평군 유명산 (862m) — 서울 1시간</div>
+      <p class="inst-body">수도권 패러글라이딩 입문자의 핵심 거점. 해발 862m 유명산 이륙장 활용. 주말반·평일반 교육 운영. 서울·경기·인천 거주자에게 접근성 최고. KPA 인가 스쿨.</p>
+      <div class="inst-offers">
+        <span class="tag">P1~P2 입문과정</span>
+        <span class="tag blue">주말반 운영</span>
+        <span class="tag">체험 비행</span>
+      </div>
+      <a href="https://search.naver.com/search.naver?query=유명산+패러글라이딩+스쿨" class="inst-link green" target="_blank" rel="noopener">유명산 스쿨 찾기 →</a>
+    </div>
+    <div class="inst-card">
+      <span class="inst-type-badge badge-para">ASSOCIATION</span>
+      <div class="inst-name">대한패러글라이딩협회 (KPA)</div>
+      <div class="inst-location">📋 KPA 정규 자격증 발급 공식 기관</div>
+      <p class="inst-body">국내 패러글라이딩 P1~P4 자격증 체계 운영. 전국 KPA 인가 스쿨 목록 조회 가능. 교관 자격 확인, 대회 일정, 활공장 안전 정보 제공. 교육 등록 전 인가 여부 반드시 확인.</p>
+      <div class="inst-offers">
+        <span class="tag gold">KPA 공식 자격증</span>
+        <span class="tag blue">인가 스쿨 목록</span>
+        <span class="tag">안전 정보</span>
+      </div>
+      <a href="https://search.naver.com/search.naver?query=대한패러글라이딩협회+KPA+자격증" class="inst-link green" target="_blank" rel="noopener">협회 정보 찾기 →</a>
+    </div>
+  </div>
+
+  <!-- 해외 체험 예약 -->
+  <div class="section-tag" style="margin-top:72px;">🌍 해외 DZ — 직접 예약 가능한 곳</div>
+  <p style="font-size:14px;color:var(--text-muted);margin:16px 0 32px;line-height:1.8;">해외 DZ는 대부분 영어 공식 웹사이트에서 직접 예약 가능합니다. 아래는 한국인이 많이 찾는 주요 DZ입니다.</p>
+  <div class="inst-grid animate-in">
+    <div class="inst-card">
+      <span class="inst-type-badge badge-sky">THAILAND DZ</span>
+      <div class="inst-name">Thai Sky Adventures</div>
+      <div class="inst-location">📍 태국 파타야 — 한국에서 3~4시간</div>
+      <p class="inst-body">한국인이 가장 많이 찾는 해외 DZ 중 하나. 한국인 교관 상주. 탠덤 체험 및 AFF 교육 가능. 연중 따뜻한 날씨로 날씨 취소 적음. 합리적 물가.</p>
+      <div class="inst-offers">
+        <span class="tag blue">탠덤 체험</span>
+        <span class="tag blue">AFF 교육</span>
+        <span class="tag gold">한국인 교관</span>
+      </div>
+      <a href="https://www.thaiskyadt.com" class="inst-link" target="_blank" rel="noopener">공식 홈페이지 →</a>
+    </div>
+    <div class="inst-card">
+      <span class="inst-type-badge badge-sky">AUSTRALIA DZ</span>
+      <div class="inst-name">Skydive Mission Beach</div>
+      <div class="inst-location">📍 호주 퀸즐랜드 미션비치</div>
+      <p class="inst-body">세계 최고 경관 중 하나. 열대우림 + 산호초 해변 위 점프. 워킹홀리데이 중 체험하는 한국인 다수. 탠덤 14,000ft~15,000ft 고도 운영.</p>
+      <div class="inst-offers">
+        <span class="tag blue">탠덤 체험</span>
+        <span class="tag gold">세계급 경관</span>
+        <span class="tag">워홀 추천</span>
+      </div>
+      <a href="https://www.skydivemissionbeach.com.au" class="inst-link" target="_blank" rel="noopener">공식 홈페이지 →</a>
+    </div>
+    <div class="inst-card">
+      <span class="inst-type-badge badge-sky">NEW ZEALAND DZ</span>
+      <div class="inst-name">NZONE Skydive Queenstown</div>
+      <div class="inst-location">📍 뉴질랜드 퀸스타운</div>
+      <p class="inst-body">세계 최고 경관의 스카이다이빙 성지. 뉴질랜드 알프스와 피오르드 위 점프. 최대 고도 15,000ft. 국제적으로 가장 많이 알려진 탠덤 체험 명소.</p>
+      <div class="inst-offers">
+        <span class="tag blue">탠덤 체험</span>
+        <span class="tag gold">세계 1위 경관</span>
+        <span class="tag">12,000~15,000ft</span>
+      </div>
+      <a href="https://www.nzone.biz" class="inst-link" target="_blank" rel="noopener">공식 홈페이지 →</a>
+    </div>
+  </div>
+
+  <div class="compare-note animate-in" style="margin-top:48px;">
+    <span style="color:var(--sky-cyan);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">// 기관 이용 안내</span>
+    <p>국내 스카이다이빙·패러글라이딩 기관은 규모가 작고 운영 일정·연락처가 시즌별로 변경됩니다. 방문 전 <strong>전화 확인 또는 네이버 카페 공지</strong>로 최신 운영 일정을 반드시 체크하세요. 특히 스카이다이빙은 날씨에 따라 당일 취소될 수 있으니 유연한 일정으로 방문하는 것을 권장합니다.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- FITNESS -->
 <section class="fitness-section" id="fitness">
   <div class="section-tag">체력 준비</div>
@@ -1850,6 +2716,129 @@
 
 <div class="divider"></div>
 
+<!-- MEDIA & COMMUNITY -->
+<section class="media-section" id="media">
+  <div class="section-tag">영감 충전</div>
+  <h2 class="section-title">보고 · 배우고 ·<br><em>연결하라</em></h2>
+  <p class="section-subtitle">혼자 시작하지 마세요. 채널을 구독하고 커뮤니티에 합류하면 정보도 빠르고 성장도 빠릅니다. 처음엔 영상으로 충분히 눈을 먼저 뜨세요.</p>
+
+  <!-- 유튜브 채널 -->
+  <div class="section-tag" style="margin-top:60px;">▶ 추천 유튜브 채널</div>
+  <p style="font-size:14px;color:var(--text-muted);margin:16px 0 32px;line-height:1.8;">입문자라면 아래 채널들을 먼저 구독하세요. 장비·기술·안전·문화까지 폭넓게 배울 수 있습니다.</p>
+
+  <div class="yt-grid animate-in">
+    <!-- 스카이다이빙 채널들 -->
+    <a class="yt-card" href="https://www.youtube.com/@GoPro" target="_blank" rel="noopener">
+      <span class="yt-thumb">🎥</span>
+      <div class="yt-channel">GoPro</div>
+      <div class="yt-handle">@GoPro</div>
+      <div class="yt-desc">세계 최고 액션캠 브랜드가 직접 담은 스카이다이빙·윙슈트·패러글라이딩 4K 영상들. 입문자가 가장 먼저 봐야 할 채널. 보는 것만으로도 결심이 생깁니다.</div>
+      <div class="yt-tags">
+        <span class="yt-tag yt-tag-sky">스카이다이빙</span>
+        <span class="yt-tag yt-tag-wing">윙슈트</span>
+        <span class="yt-tag yt-tag-para">패러글라이딩</span>
+      </div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/@RedBull" target="_blank" rel="noopener">
+      <span class="yt-thumb">🐂</span>
+      <div class="yt-channel">Red Bull</div>
+      <div class="yt-handle">@RedBull</div>
+      <div class="yt-desc">레드불이 후원하는 세계 최고 윙슈트 파일럿들의 프록시마이티 플라잉과 익스트림 스카이다이빙. 보는 이의 심장을 멈추게 하는 퀄리티의 영상 제작.</div>
+      <div class="yt-tags">
+        <span class="yt-tag yt-tag-wing">윙슈트</span>
+        <span class="yt-tag yt-tag-sky">익스트림</span>
+      </div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/results?search_query=wingsuit+flying+tutorial+proximity" target="_blank" rel="noopener">
+      <span class="yt-thumb">🦅</span>
+      <div class="yt-channel">Wingsuit 검색</div>
+      <div class="yt-handle">YouTube 검색 바로가기</div>
+      <div class="yt-desc">Squirrel(squirrel.ws)은 세계 최고의 윙슈트 제조사입니다. 공식 YouTube 채널 URL이 자주 변경되므로, 이 링크로 최신 윙슈트 영상을 직접 검색하세요. "squirrel wingsuit" 검색도 추천합니다.</div>
+      <div class="yt-tags">
+        <span class="yt-tag yt-tag-wing">윙슈트</span>
+        <span class="yt-tag yt-tag-edu">프록시마이티</span>
+        <span class="yt-tag yt-tag-sky">교육 영상</span>
+      </div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/@flyozone" target="_blank" rel="noopener">
+      <span class="yt-thumb">🪁</span>
+      <div class="yt-channel">Ozone Paragliders</div>
+      <div class="yt-handle">@flyozone</div>
+      <div class="yt-desc">세계 최대 패러글라이딩 장비 제조사. EN A입문 글라이더부터 고성능 경쟁 글라이더까지 비교 영상. 실제 비행 장면과 어크로배틱 영상 다수.</div>
+      <div class="yt-tags">
+        <span class="yt-tag yt-tag-para">패러글라이딩</span>
+        <span class="yt-tag yt-tag-edu">장비 가이드</span>
+      </div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/@xcmag" target="_blank" rel="noopener">
+      <span class="yt-thumb">🌄</span>
+      <div class="yt-channel">XC Magazine</div>
+      <div class="yt-handle">@xcmag</div>
+      <div class="yt-desc">패러글라이딩 전문 매거진의 공식 채널. 세계 대회, 알프스 크로스컨트리 비행, 기상 분석, 안전 세미나 등 깊이 있는 콘텐츠. P2 이상 필수 시청.</div>
+      <div class="yt-tags">
+        <span class="yt-tag yt-tag-para">패러글라이딩</span>
+        <span class="yt-tag yt-tag-sky">XC 비행</span>
+        <span class="yt-tag yt-tag-edu">안전 교육</span>
+      </div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/results?search_query=스카이다이빙+패러글라이딩+한국+vlog" target="_blank" rel="noopener">
+      <span class="yt-thumb">🇰🇷</span>
+      <div class="yt-channel">국내 채널 검색</div>
+      <div class="yt-handle">YouTube 검색 바로가기</div>
+      <div class="yt-desc">국내 스카이다이빙·패러글라이딩 유튜버들이 빠르게 늘고 있습니다. 국내 DZ 리뷰, AFF 과정 브이로그, 단양 활공장 비행 영상 등 한국어 콘텐츠 검색.</div>
+      <div class="yt-tags">
+        <span class="yt-tag yt-tag-kr">한국어</span>
+        <span class="yt-tag yt-tag-para">국내 체험</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- 커뮤니티 & 협회 -->
+  <div class="section-tag" style="margin-top:72px;">💬 커뮤니티 & 협회</div>
+  <p style="font-size:14px;color:var(--text-muted);margin:16px 0 0;line-height:1.8;">실제 경험자에게 직접 물어보는 것이 어떤 가이드보다 빠릅니다. 아래 커뮤니티에서 멘토를 만나세요.</p>
+  <div class="community-grid">
+    <a class="comm-card animate-in" href="https://search.naver.com/search.naver?where=cafeblog&sm=tab_jum&query=스카이다이빙+카페" target="_blank" rel="noopener">
+      <div class="comm-icon">☁️</div>
+      <div>
+        <div class="comm-name">네이버 카페 — 스카이다이버 커뮤니티</div>
+        <div class="comm-desc">국내 스카이다이버들의 온라인 커뮤니티. 국내외 DZ 리뷰, 장비 중고 거래, AFF 교육 후기, 입문자 질문 환영 분위기. 실제 점프 동료를 찾는 최고의 공간.</div>
+        <span class="comm-link-text">→ 네이버 카페 검색으로 연결</span>
+      </div>
+    </a>
+    <a class="comm-card animate-in" href="https://search.naver.com/search.naver?where=cafeblog&sm=tab_jum&query=패러글라이딩+동호회+카페" target="_blank" rel="noopener">
+      <div class="comm-icon">🌿</div>
+      <div>
+        <div class="comm-name">네이버 카페 — 패러글라이딩 동호회</div>
+        <div class="comm-desc">전국 활공장 정보와 날씨 공유, 장비 중고 거래, 동반 비행 파트너 모집. P1 입문자도 적극 환영. 지역별 스쿨 추천과 리뷰 확인 가능.</div>
+        <span class="comm-link-text">→ 네이버 카페 검색으로 연결</span>
+      </div>
+    </a>
+    <a class="comm-card animate-in" href="https://search.naver.com/search.naver?query=한국항공스포츠협회" target="_blank" rel="noopener">
+      <div class="comm-icon">✈️</div>
+      <div>
+        <div class="comm-name">한국항공스포츠협회 (KAFA)</div>
+        <div class="comm-desc">국내 스카이다이빙·낙하산 스포츠 공식 관할 단체. 국내 인가 DZ 목록, 국내 라이선스 취득 절차, 대회 일정 등 공식 정보 확인.</div>
+        <span class="comm-link-text">→ 네이버에서 검색</span>
+      </div>
+    </a>
+    <a class="comm-card animate-in" href="https://open.kakao.com/o/s/skydiving" target="_blank" rel="noopener">
+      <div class="comm-icon">💛</div>
+      <div>
+        <div class="comm-name">카카오톡 오픈채팅</div>
+        <div class="comm-desc">"스카이다이빙", "패러글라이딩", "윙슈트" 키워드로 검색하면 활발한 오픈채팅방들이 나옵니다. 실시간으로 현지 날씨·운영 여부를 확인할 수 있는 가장 빠른 채널.</div>
+        <span class="comm-link-text">→ 카카오 오픈채팅에서 직접 검색</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="compare-note animate-in" style="margin-top:48px;">
+    <span style="color:var(--sky-cyan);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:2px;">// COMMUNITY TIP</span>
+    <p>커뮤니티 가입을 망설이지 마세요. 국내 하늘 스포츠 커뮤니티는 입문자를 <strong>적극 환영</strong>합니다. "처음인데 뭐부터 시작할까요?"라는 질문에 친절하게 답해주는 선배 스카이다이버·패러글라이더들이 기다리고 있습니다. 커뮤니티에서 멘토를 찾는 것이 가장 빠른 입문 경로입니다.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="section-tag">자주 묻는 질문</div>
@@ -2090,8 +3079,10 @@
     <a href="#paragliding">패러글라이딩</a>
     <a href="#wingsuit">윙슈트</a>
     <a href="#countries">국가별 비교</a>
+    <a href="#institutions">국내 기관</a>
     <a href="#fitness">체력 준비</a>
     <a href="#equipment">장비</a>
+    <a href="#media">채널&커뮤니티</a>
     <a href="#faq">FAQ</a>
     <a href="#safety">안전 원칙</a>
   </div>
